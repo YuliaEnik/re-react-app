@@ -10,7 +10,7 @@ class Card extends React.Component<IData> {
 
   render() {
     return (
-      <div className="card-wrapper" data-testid="card">
+      <li className="card-wrapper" data-testid="card">
         <img
           src={`https://www.artic.edu/iiif/2/${this.props.image_id}/full/843,/0/default.jpg`}
           alt={this.props.title}
@@ -24,7 +24,7 @@ class Card extends React.Component<IData> {
         <h3>
           Year: <i>{this.props.date_display}</i>
         </h3>
-      </div>
+      </li>
     );
   }
 }

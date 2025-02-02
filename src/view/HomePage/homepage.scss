@@ -2,7 +2,9 @@
   margin: 4rem auto;
   width: 100%;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
 }
 
 .cards-wrapper {

@@ -4,6 +4,8 @@ import { IData, IDataApi } from '../../Data/data';
 import { Card } from '../../Components/Card';
 import { getURL } from '../../Api';
 import './homepage.scss';
+import ErrorButton from '../../Components/ErrorButton';
+import ErrorBoundary from '../../Components/ErrorBoundary';
 
 class HomePage extends React.Component<unknown, IDataApi> {
   constructor(props: unknown) {
@@ -39,17 +41,19 @@ class HomePage extends React.Component<unknown, IDataApi> {
   render() {
     return (
       <>
-        <Search />
-
-        <main className="main">
-          <div className="cards-wrapper">
-            {this.state.isLoading && <p className="loading">Loading...</p>}
-            {this.state.repos &&
-              this.state.repos.map((cardData: IData) => (
-                <Card {...cardData} key={cardData.image_id} />
-              ))}
-          </div>
-        </main>
+        <ErrorBoundary>
+          <Search />
+          <main className="main">
+            <ul className="cards-wrapper">
+              {this.state.isLoading && <p className="loading">Loading...</p>}
+              {this.state.repos &&
+                this.state.repos.map((cardData: IData) => (
+                  <Card {...cardData} key={cardData.image_id} />
+                ))}
+            </ul>
+            <ErrorButton />
+          </main>
+        </ErrorBoundary>
       </>
     );
   }
