@@ -41,9 +41,11 @@
       outline-offset: none;
     }
   }
-  &_svg {
-    position: absolute;
-    left: 0;
+}
+
+@media (min-width: 1280px) {
+  .search {
+    width: 80rem;
   }
 }
 
