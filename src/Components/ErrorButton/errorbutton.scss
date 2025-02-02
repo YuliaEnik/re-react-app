@@ -1,0 +1,12 @@
+.error-button {
+  height: 3rem;
+  min-width: 15rem;
+  color: #213547;
+  background-color: #e9e6e6;
+  box-shadow: 0 0 10px 5px rgb(209, 208, 208);
+  transition: all 0.8s;
+  font-size: 0.8rem;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
