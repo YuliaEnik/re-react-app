@@ -23,17 +23,19 @@ class HomePage extends React.Component<unknown, IDataApi> {
   }
 
   getApi = async () => {
-    this.setState({ isLoading: true });
+    this.setState({
+      isLoading: true,
+      repos: null,
+    });
+    const search = localStorage.getItem('items') || '';
     try {
-      const repos = await getURL();
+      const repos = await getURL(search);
       this.setState({
         isLoading: false,
         repos: repos.data,
       });
-      console.log(repos.data);
     } catch (error: unknown) {
       console.error(error);
-    } finally {
       this.setState({ isLoading: false });
     }
   };
@@ -42,7 +44,7 @@ class HomePage extends React.Component<unknown, IDataApi> {
     return (
       <>
         <ErrorBoundary>
-          <Search />
+          <Search onSearch={this.getApi} />
           <main className="main">
             <ul className="cards-wrapper">
               {this.state.isLoading && <p className="loading">Loading...</p>}

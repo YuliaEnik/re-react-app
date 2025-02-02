@@ -2,9 +2,10 @@ import React from 'react';
 import './search.scss';
 
 type IState = { value: string };
+type searchProps = { onSearch: (value: string) => void };
 
-class Search extends React.Component<unknown, IState> {
-  constructor(props: unknown) {
+class Search extends React.Component<searchProps, IState> {
+  constructor(props: searchProps) {
     super(props);
     this.state = {
       value: '',
@@ -19,13 +20,14 @@ class Search extends React.Component<unknown, IState> {
       const target = e.target as typeof e.target & {
         text: { value: string };
       };
-      const value = target.text.value;
+      const value = target.text.value.trim();
       localStorage.setItem('items', value);
+      this.props.onSearch(this.state.value.trim());
     }
   }
 
   handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    this.setState({ value: event.currentTarget.value });
+    this.setState({ value: event.target.value });
   };
 
   componentDidMount(): void {
