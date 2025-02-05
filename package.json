@@ -10,9 +10,12 @@
     "preview": "vite preview",
     "format:fix": "prettier --write .",
     "prepare": "husky && husky install",
-    "test": "echo \"No test specified\""
+    "test": "echo \"No test specified\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "gh-pages": "^6.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
