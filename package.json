@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "format:fix": "prettier --write .",
-    "prepare": "husky && husky install",
+    "prepare": "husky",
     "test": "echo \"No test specified\"",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
