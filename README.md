@@ -4,4 +4,4 @@
 
 ### This is a tutorial project to learn about react
 
-## The result of my work  [Art App](https://YuliaEnik.github.io/re-react-app)
+## Result of my work  [Art App](https://YuliaEnik.github.io/re-react-app)
