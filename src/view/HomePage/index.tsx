@@ -3,9 +3,9 @@ import { Search } from '../../Components/Search';
 import { IData, IDataApi } from '../../Data/data';
 import { Card } from '../../Components/Card';
 import { getURL } from '../../Api';
-import './homepage.scss';
 import ErrorButton from '../../Components/ErrorButton';
 import ErrorBoundary from '../../Components/ErrorBoundary';
+import './homepage.scss';
 
 class HomePage extends React.Component<unknown, IDataApi> {
   constructor(props: unknown) {
