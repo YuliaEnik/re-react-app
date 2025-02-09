@@ -1,63 +1,149 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { Search } from '../../Components/Search';
-import { IData, IDataApi } from '../../Data/data';
-import { Card } from '../../Components/Card';
-import { getURL } from '../../Api';
-import ErrorButton from '../../Components/ErrorButton';
-import ErrorBoundary from '../../Components/ErrorBoundary';
-import './homepage.scss';
+import { Card, IData } from '../../Components/Card';
+import { ModalPage } from '../ModalPage';
+import { CardModal, IModalCard } from '../../Components/CardModal';
+import { getURL } from '../../service';
+import { ErrorButton } from '../../Components/ErrorButton';
+import './style.scss';
 
-class HomePage extends React.Component<unknown, IDataApi> {
-  constructor(props: unknown) {
-    super(props);
-    this.state = {
-      repos: null,
-      isLoading: false,
-    };
-  }
+export interface IDataApi {
+  loading?: boolean;
+  repos?: IData[] | null;
+  error?: string | null;
+}
 
-  componentDidMount(): void {
-    this.getApi().catch((error: unknown) => {
-      console.error('API Call failed', error);
-    });
-  }
+export interface IDataModal {
+  loading?: boolean;
+  repos?: IModalCard[] | null;
+}
 
-  getApi = async () => {
-    this.setState({
-      isLoading: true,
-      repos: null,
-    });
-    const search = localStorage.getItem('items') || '';
+export function HomePage(): JSX.Element {
+  const [appState, setAppState] = useState<IDataApi>({
+    loading: false,
+    repos: null,
+    error: null,
+  });
+
+  const [searchValue, setSearchValue] = useState(
+    localStorage.getItem('search') || ''
+  );
+
+  const [modalState, setModalState] = useState<IDataModal>({
+    loading: false,
+    repos: null,
+  });
+
+  const [isActive, setIsActive] = useState<boolean>(false);
+
+  const getApi = async (): Promise<void> => {
+    setAppState((prevState) => ({ ...prevState, loading: true, error: null }));
     try {
-      const repos = await getURL(search);
-      this.setState({
-        isLoading: false,
-        repos: repos.data,
-      });
-    } catch (error: unknown) {
-      console.error(error);
-      this.setState({ isLoading: false });
+      const repos = await getURL(searchValue);
+      if (repos && repos.data) {
+        setAppState((prevState) => ({
+          ...prevState,
+          loading: false,
+          repos: repos.data,
+          error: null,
+        }));
+      } else {
+        throw new Error('Something go wrong');
+      }
+    } catch (error) {
+      setAppState((prevState) => ({
+        ...prevState,
+        loading: false,
+        error: error instanceof Error ? error.message : 'Something go wrong',
+      }));
     }
   };
 
-  render() {
-    return (
-      <>
-        <ErrorBoundary>
-          <Search onSearch={this.getApi} />
-          <main className="main">
-            <ul className="cards-wrapper">
-              {this.state.isLoading && <p className="loading">Loading...</p>}
-              {this.state.repos &&
-                this.state.repos.map((cardData: IData) => (
-                  <Card {...cardData} key={cardData.image_id} />
-                ))}
-            </ul>
-            <ErrorButton />
-          </main>
-        </ErrorBoundary>
-      </>
-    );
-  }
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  };
+
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    localStorage.setItem('search', searchValue);
+    setAppState((prevState) => ({
+      ...prevState,
+      loading: true,
+      repos: null,
+      error: null,
+    }));
+    getApi();
+  };
+
+  useEffect(() => {
+    setAppState((prevState) => ({ ...prevState, loading: true, error: null }));
+    getApi();
+  }, []);
+
+  const openModal = (id: number) => {
+    setIsActive(true);
+    showDataModal(id);
+  };
+  const closeModal = () => {
+    setIsActive(false);
+  };
+
+  const showDataModal = (id: number) => {
+    setModalState({ loading: true });
+    const apiUrl = `https://api.artic.edu/api/v1/artworks/${id}`;
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .catch((error) => console.log(error))
+      .then((repos) => {
+        setModalState({ loading: false, repos: repos.data });
+        console.log(repos.data);
+      });
+  };
+
+  return (
+    <>
+      <div className="cards-page">
+        <Search
+          search={searchValue}
+          onChange={handleChange}
+          onSubmit={handleSearch}
+        />
+        <ul className="cards-list">
+          {appState.loading && <p className="loading">Loading...</p>}
+          {appState.repos && (
+            <>
+              <li className="cards-list_row title">
+                <h4>Image</h4>
+                <h4>Author</h4>
+                <h4>Name</h4>
+              </li>
+              {appState.repos.map((data: IData) => (
+                <Card
+                  {...data}
+                  key={data.id}
+                  onClick={() => openModal(data.id)}
+                />
+              ))}
+            </>
+          )}
+        </ul>
+        <ModalPage isActive={isActive} closeModal={closeModal}>
+          {modalState.loading && <p className="loading">Loading...</p>}
+          {modalState.repos && (
+            <CardModal
+              id={0}
+              title={''}
+              artist_title={''}
+              date_display={''}
+              image_id={''}
+              artwork_type_title={''}
+              artist_display={''}
+              {...modalState.repos}
+            />
+          )}
+        </ModalPage>
+      </div>
+      <ErrorButton />
+    </>
+  );
 }
-export { HomePage };

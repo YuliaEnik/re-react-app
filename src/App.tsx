@@ -1,11 +1,13 @@
-import React from 'react';
-import { HomePage } from './view/HomePage';
+import { Layout } from './Components/Layout';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
-class App extends React.Component {
-  render() {
-    return <HomePage />;
-  }
+export function App(): JSX.Element {
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}></Route>
+    </Routes>
+  );
 }
 
 export default App;

@@ -31,6 +31,9 @@ a {
 a:hover {
   opacity: 0.5;
 }
+li {
+list-style-type: none;
+}
 input {
   color: #213547;
   background-color: #f9f9f9;
@@ -64,7 +67,7 @@ button:hover {
 }
 
 button:active {
-  background-color: #817f7f;
+  background-color: #7c7c7c;
 }
 
 @media (prefers-color-scheme: light) {
