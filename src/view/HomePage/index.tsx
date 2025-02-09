@@ -78,7 +78,7 @@ export function HomePage(): JSX.Element {
   useEffect(() => {
     setAppState((prevState) => ({ ...prevState, loading: true, error: null }));
     getApi();
-  }, []);
+  });
 
   const openModal = (id: number) => {
     setIsActive(true);
