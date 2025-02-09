@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Search } from '../../Components/Search';
 import { Card, IData } from '../../Components/Card';
 import { ModalPage } from '../ModalPage';
@@ -36,7 +36,7 @@ export function HomePage(): JSX.Element {
 
   const [isActive, setIsActive] = useState<boolean>(false);
 
-  const getApi = async (): Promise<void> => {
+  const getApi = useCallback(async (): Promise<void> => {
     setAppState((prevState) => ({ ...prevState, loading: true, error: null }));
     try {
       const repos = await getURL(searchValue);
@@ -57,7 +57,7 @@ export function HomePage(): JSX.Element {
         error: error instanceof Error ? error.message : 'Something go wrong',
       }));
     }
-  };
+  }, [searchValue]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
@@ -78,7 +78,7 @@ export function HomePage(): JSX.Element {
   useEffect(() => {
     setAppState((prevState) => ({ ...prevState, loading: true, error: null }));
     getApi();
-  });
+  }, [getApi]);
 
   const openModal = (id: number) => {
     setIsActive(true);
