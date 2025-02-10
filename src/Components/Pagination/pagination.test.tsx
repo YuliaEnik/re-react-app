@@ -1,6 +1,6 @@
+import '@testing-library/jest-dom';
 import { describe, it, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { Pagination } from './';
 
 describe('test pagination component', () => {

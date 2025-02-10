@@ -1,3 +1,14 @@
+.modal-wrapper-close {
+  position: fixed;
+  display: flex;
+  justify-content: right;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+}
+
+
 .modal-wrapper {
   height: 100%;
   width: 45%;

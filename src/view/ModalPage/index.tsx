@@ -14,17 +14,19 @@ export const ModalPage = ({
   return (
     <>
       {isActive && (
-        <div className="modal-wrapper" onClick={closeModal}>
-          <div
-            className="modal-content"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className="modal-header">
-              <div className="btn-modal" onClick={closeModal}>
-                <p className="btn-modal__img">X</p>
+        <div className="modal-wrapper-close" onClick={closeModal}>
+          <div className="modal-wrapper">
+            <div
+              className="modal-content"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="modal-header">
+                <div className="btn-modal" onClick={closeModal}>
+                  <p className="btn-modal__img">X</p>
+                </div>
               </div>
+              <div className="modal-body">{children}</div>
             </div>
-            <div className="modal-body">{children}</div>
           </div>
         </div>
       )}

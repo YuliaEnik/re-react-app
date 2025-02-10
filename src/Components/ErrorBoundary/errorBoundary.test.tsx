@@ -1,8 +1,8 @@
+import '@testing-library/jest-dom/vitest';
 import { describe, it, expect, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import ErrorBoundary from '.';
 import { ErrorButton } from '../ErrorButton';
-import '@testing-library/jest-dom/vitest';
 
 describe('ErrorBoundary Component', () => {
   it('renders children when there is no error', () => {
