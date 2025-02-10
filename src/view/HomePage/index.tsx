@@ -6,6 +6,8 @@ import { CardModal, IModalCard } from '../../Components/CardModal';
 import { getURL } from '../../service';
 import { ErrorButton } from '../../Components/ErrorButton';
 import './style.scss';
+import { Pagination } from '../../Components/Pagination';
+import { useSearchParams } from 'react-router-dom';
 
 export interface IDataApi {
   loading?: boolean;
@@ -24,6 +26,10 @@ export function HomePage(): JSX.Element {
     repos: null,
     error: null,
   });
+  const [, setSearchParams] = useSearchParams();
+
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
 
   const [searchValue, setSearchValue] = useState(
     localStorage.getItem('search') || ''
@@ -39,7 +45,9 @@ export function HomePage(): JSX.Element {
   const getApi = useCallback(async (): Promise<void> => {
     setAppState((prevState) => ({ ...prevState, loading: true, error: null }));
     try {
-      const repos = await getURL(searchValue);
+      const repos = await getURL(page, searchValue);
+      const total = repos.pagination.total_pages;
+      setTotalPages(total);
       if (repos && repos.data) {
         setAppState((prevState) => ({
           ...prevState,
@@ -57,7 +65,7 @@ export function HomePage(): JSX.Element {
         error: error instanceof Error ? error.message : 'Something go wrong',
       }));
     }
-  }, [searchValue]);
+  }, [searchValue, page]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
@@ -65,6 +73,7 @@ export function HomePage(): JSX.Element {
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setPage(1);
     localStorage.setItem('search', searchValue);
     setAppState((prevState) => ({
       ...prevState,
@@ -77,8 +86,9 @@ export function HomePage(): JSX.Element {
 
   useEffect(() => {
     setAppState((prevState) => ({ ...prevState, loading: true, error: null }));
+    setSearchParams({ page: page.toString() });
     getApi();
-  }, [getApi]);
+  }, [getApi, setSearchParams, page]);
 
   const openModal = (id: number) => {
     setIsActive(true);
@@ -100,33 +110,45 @@ export function HomePage(): JSX.Element {
       });
   };
 
+  const handlePageChange = (page: number) => {
+    setSearchParams({ page: page.toString() });
+    setPage(page);
+  };
+
   return (
     <>
-      <div className="cards-page">
+      <div className="home-page">
         <Search
           search={searchValue}
           onChange={handleChange}
           onSubmit={handleSearch}
         />
-        <ul className="cards-list">
-          {appState.loading && <p className="loading">Loading...</p>}
-          {appState.repos && (
-            <>
-              <li className="cards-list_row title">
-                <h4>Image</h4>
-                <h4>Author</h4>
-                <h4>Name</h4>
-              </li>
-              {appState.repos.map((data: IData) => (
-                <Card
-                  {...data}
-                  key={data.id}
-                  onClick={() => openModal(data.id)}
-                />
-              ))}
-            </>
-          )}
-        </ul>
+        <div className="cards-list-page">
+          <ul className="cards-list">
+            {appState.loading && <p className="loading">Loading...</p>}
+            {appState.repos && (
+              <>
+                <li className="cards-list_row title">
+                  <h4>Image</h4>
+                  <h4>Author</h4>
+                  <h4>Name</h4>
+                </li>
+                {appState.repos.map((data: IData) => (
+                  <Card
+                    {...data}
+                    key={data.id}
+                    onClick={() => openModal(data.id)}
+                  />
+                ))}
+              </>
+            )}
+          </ul>
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </div>
         <ModalPage isActive={isActive} closeModal={closeModal}>
           {modalState.loading && <p className="loading">Loading...</p>}
           {modalState.repos && (

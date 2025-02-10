@@ -21,7 +21,7 @@ export const ModalPage = ({
           >
             <div className="modal-header">
               <div className="btn-modal" onClick={closeModal}>
-                <img className="btn-modal__img" src="/close.png" alt="close" />
+                <p className="btn-modal__img">X</p>
               </div>
             </div>
             <div className="modal-body">{children}</div>
