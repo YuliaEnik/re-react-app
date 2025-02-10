@@ -13,7 +13,7 @@ const Search: React.FC<SearchProps> = ({ search, onChange, onSubmit }) => {
   return (
     <div className="header">
       <div className="search">
-        <form className="search" onSubmit={onSubmit}>
+        <form className="search" onSubmit={onSubmit} data-testid="search-form">
           <input
             type="text"
             name="text"

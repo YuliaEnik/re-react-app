@@ -13,7 +13,11 @@ export const ErrorButton: React.FC = () => {
   }
 
   return (
-    <button className="error-button" onClick={madeError}>
+    <button
+      className="error-button"
+      onClick={madeError}
+      data-testid="error-button"
+    >
       ErrorButton
     </button>
   );
