@@ -3,7 +3,7 @@ import { Search } from '../../Components/Search';
 import { Card, IData } from '../../Components/Card';
 import { ModalPage } from '../ModalPage';
 import { CardModal, IModalCard } from '../../Components/CardModal';
-import { getURL } from '../../service';
+import { getURL } from '../../service/getApi';
 import { ErrorButton } from '../../Components/ErrorButton';
 import './style.scss';
 import { Pagination } from '../../Components/Pagination';
