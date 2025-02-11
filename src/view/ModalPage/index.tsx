@@ -14,7 +14,6 @@ export const ModalPage = ({
   return (
     <>
       {isActive && (
-        /*  <div className="modal-wrapper-close" onClick={closeModal}> */
         <div className="modal-wrapper">
           <div
             className="modal-content"
@@ -28,7 +27,6 @@ export const ModalPage = ({
             <div className="modal-body">{children}</div>
           </div>
         </div>
-        /*  </div> */
       )}
     </>
   );

@@ -20,13 +20,14 @@
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
 }
 @media (max-width:620px) {
   .home-page {
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
+    padding: 5rem 1rem 1rem 1rem;
   }
   .cards-list-page {
     width: 100%;
