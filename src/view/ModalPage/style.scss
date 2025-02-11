@@ -8,13 +8,18 @@
   z-index: 10;
 }
 
-
 .modal-wrapper {
   height: 100%;
   width: 45%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width:620px) {
+  .modal-wrapper {
+    width: 100%;
+  }
 }
 
 .modal-content {

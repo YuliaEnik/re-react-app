@@ -8,7 +8,6 @@ import { ErrorButton } from '../../Components/ErrorButton';
 import { Pagination } from '../../Components/Pagination';
 import { useSearchParams } from 'react-router-dom';
 import './style.scss';
-
 export interface IDataApi {
   loading?: boolean;
   repos?: IData[] | null;
