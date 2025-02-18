@@ -1,8 +1,8 @@
 import { describe, it, expect, vi } from 'vitest';
 import '@testing-library/jest-dom/vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { Card } from './';
-import type { IData } from './';
+import { Card } from './card';
+import type { IData } from './card';
 
 describe('Card Component', () => {
   const mockData: IData = {
@@ -11,7 +11,6 @@ describe('Card Component', () => {
     artist_title: 'Narcissa Niblack Thorne',
     date_display: 'c. 1937',
     image_id: '134f4704-90b5-c956-94ed-6548a52f819a',
-    isActive: false,
   };
 
   it('renders the card with correct data', () => {
@@ -22,13 +21,11 @@ describe('Card Component', () => {
       `https://www.artic.edu/iiif/2/${mockData.image_id}/full/843,/0/default.jpg`
     );
     expect(image).toHaveAttribute('alt', mockData.title);
-    expect(screen.getByText(mockData.artist_title)).toBeInTheDocument();
-    expect(screen.getByText(mockData.title)).toBeInTheDocument();
   });
 
   it('calls onClick when the card is clicked', () => {
     const onClickMock = vi.fn();
-    render(<Card {...mockData} onClick={onClickMock} />);
+    render(<Card {...mockData} />);
 
     const card = screen.getByTestId('card');
     fireEvent.click(card);

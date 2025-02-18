@@ -1,33 +1,44 @@
-export const getURL = async (
-  page: number = 1,
-  search?: string,
-  id?: number
-) => {
-  const baseURL = 'https://api.artic.edu/api/v1/artworks';
-  const searchParams = new URLSearchParams();
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-  searchParams.append('fields', 'id,title,artist_title,date_display,image_id');
-  searchParams.append('page', page.toString());
+const baseURL = 'https://api.artic.edu/api/v1/artworks';
 
-  let path = baseURL;
+export const artworksApi = createApi({
+  reducerPath: 'artworksApi',
+  baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
+  endpoints: (builder) => ({
+    getAllArtworks: builder.query({
+      query: (page: number) => ({
+        url: '/',
+        params: {
+          fields: 'id,title,artist_title,image_id',
+          page,
+        },
+      }),
+    }),
+    searchArtworks: builder.query({
+      query: ({ query, page }: { query: string; page: number }) => ({
+        url: '/search',
+        params: {
+          fields: 'id,title,artist_title,image_id',
+          q: query,
+          page,
+        },
+      }),
+    }),
+    getArtworkDetails: builder.query({
+      query: (id: number) => ({
+        url: `/${id}`,
+        params: {
+          fields:
+            'id,title,artist_title,image_id,date_display,artwork_type_title,artist_display',
+        },
+      }),
+    }),
+  }),
+});
 
-  if (search) {
-    path = `${baseURL}/search`;
-    searchParams.append('q', search);
-  }
-  if (id) {
-    path = `${path}/${id}`;
-  }
-
-  const url = `${path}?${searchParams.toString()}`;
-
-  const res = await fetch(url, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-  });
-
-  return await res.json();
-};
+export const {
+  useGetAllArtworksQuery,
+  useSearchArtworksQuery,
+  useGetArtworkDetailsQuery,
+} = artworksApi;

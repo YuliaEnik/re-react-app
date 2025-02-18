@@ -27,6 +27,7 @@ export default tseslint.config(
       'react-compiler': reactCompiler,
     },
     rules: {
+      'react/prop-types': 'off',
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',

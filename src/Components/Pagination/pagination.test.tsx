@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { describe, it, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { Pagination } from './';
+import { Pagination } from './pagination';
 
 describe('test pagination component', () => {
   const onPageChangeMock = vi.fn();

@@ -1,15 +1,14 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { Search } from '.';
+import { Search } from './search';
 import '@testing-library/jest-dom/vitest';
 
 describe('Search Component', () => {
   it('renders the search input and form', () => {
     const mockOnSubmit = vi.fn();
-    const mockOnChange = vi.fn();
 
     render(
-      <Search search="" onChange={mockOnChange} onSubmit={mockOnSubmit} />
+      <Search onSubmit={mockOnSubmit} />
     );
     const input = screen.getByPlaceholderText('Search...');
     const form = screen.getByTestId('search-form');
@@ -23,7 +22,7 @@ describe('Search Component', () => {
     const mockOnChange = vi.fn();
 
     render(
-      <Search search="" onChange={mockOnChange} onSubmit={mockOnSubmit} />
+      <Search  onSubmit={mockOnSubmit} />
     );
 
     const input = screen.getByPlaceholderText('Search...');
@@ -41,10 +40,9 @@ describe('Search Component', () => {
 
   it('calls onSubmit when the form is submitted', () => {
     const mockOnSubmit = vi.fn();
-    const mockOnChange = vi.fn();
 
     render(
-      <Search search="" onChange={mockOnChange} onSubmit={mockOnSubmit} />
+      <Search onSubmit={mockOnSubmit} />
     );
 
     const form = screen.getByTestId('search-form');
@@ -55,12 +53,9 @@ describe('Search Component', () => {
 
   it('displays the initial search value', () => {
     const mockOnSubmit = vi.fn();
-    const mockOnChange = vi.fn();
 
     render(
       <Search
-        search="initial value"
-        onChange={mockOnChange}
         onSubmit={mockOnSubmit}
       />
     );

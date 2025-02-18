@@ -1,7 +1,7 @@
 import { vi } from 'vitest';
-import { getURL } from './getApi';
+import { useGetAllArtworksQuery } from './getApi';
 
-describe('getURL', () => {
+describe('useGetAllArtworksQuery', () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
@@ -20,7 +20,7 @@ describe('getURL', () => {
     });
     global.fetch = vi.fn().mockImplementation(() => mockFetch);
 
-    await getURL(123);
+    await useGetAllArtworksQuery(123);
     expect(global.fetch).toHaveBeenCalledTimes(1);
   });
 
@@ -44,7 +44,7 @@ describe('getURL', () => {
     });
     global.fetch = vi.fn().mockImplementation(() => mockFetch);
 
-    const data = await getURL(234);
+    const data = await useGetAllArtworksQuery(234);
     expect(data).toMatchObject(cardData);
   });
 });
