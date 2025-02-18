@@ -6,12 +6,12 @@ export interface SearchProps {
   initialQuery?: string;
 }
 
-const Search: React.FC<SearchProps> = ({ onSubmit, initialQuery = '' }) => {
-  const [input, setInput] = useState(initialQuery);
+const Search: React.FC<SearchProps> = (props: SearchProps) => {
+  const [input, setInput] = useState(props.initialQuery || '');
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    onSubmit(input);
+    props.onSubmit(input);
   };
   return (
     <header className="header">

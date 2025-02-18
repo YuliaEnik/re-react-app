@@ -3,10 +3,10 @@
   padding: 0.3rem 1rem;
   display: grid;
   grid-template-columns: 10% 20% 70%;
-  font-size: .7rem;
+  font-size: 0.7rem;
   align-items: center;
   box-shadow: 0 0 10px 5px rgb(221, 221, 221);
-  transition: all .8s;
+  transition: all 0.8s;
   gap: 1rem;
   &:hover {
     transform: scale(1.01);

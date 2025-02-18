@@ -7,9 +7,7 @@ describe('Search Component', () => {
   it('renders the search input and form', () => {
     const mockOnSubmit = vi.fn();
 
-    render(
-      <Search onSubmit={mockOnSubmit} />
-    );
+    render(<Search onSubmit={mockOnSubmit} />);
     const input = screen.getByPlaceholderText('Search...');
     const form = screen.getByTestId('search-form');
 
@@ -21,9 +19,7 @@ describe('Search Component', () => {
     const mockOnSubmit = vi.fn();
     const mockOnChange = vi.fn();
 
-    render(
-      <Search  onSubmit={mockOnSubmit} />
-    );
+    render(<Search onSubmit={mockOnSubmit} />);
 
     const input = screen.getByPlaceholderText('Search...');
     fireEvent.change(input, { target: { value: 'test' } });
@@ -41,9 +37,7 @@ describe('Search Component', () => {
   it('calls onSubmit when the form is submitted', () => {
     const mockOnSubmit = vi.fn();
 
-    render(
-      <Search onSubmit={mockOnSubmit} />
-    );
+    render(<Search onSubmit={mockOnSubmit} />);
 
     const form = screen.getByTestId('search-form');
     fireEvent.submit(form);
@@ -54,11 +48,7 @@ describe('Search Component', () => {
   it('displays the initial search value', () => {
     const mockOnSubmit = vi.fn();
 
-    render(
-      <Search
-        onSubmit={mockOnSubmit}
-      />
-    );
+    render(<Search onSubmit={mockOnSubmit} />);
     const input = screen.getByPlaceholderText('Search...');
     expect(input).toHaveValue('initial value');
   });

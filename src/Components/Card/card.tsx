@@ -11,33 +11,27 @@ export interface IData {
   onClick?: () => void;
 }
 
-const Card: React.FC<IData> = ({ id, artist_title, title, image_id }) => {
+const Card: React.FC<IData> = (props: IData) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(openModal({ id: id }));
+    dispatch(openModal({ id: props.id }));
   };
 
   return (
     <li className="cards-list_row" data-testid="card" onClick={handleClick}>
-      {image_id && (
-        <img
-          className="cards-list_row_img"
-          src={`https://www.artic.edu/iiif/2/${image_id}/full/843,/0/default.jpg`}
-          alt={title}
-          loading="lazy"
-        />
-      )}
-      {artist_title && (
-        <h3>
-          <i>{artist_title}</i>
-        </h3>
-      )}
-      {title && (
-        <h3>
-          <i>{title}</i>
-        </h3>
-      )}
+      <img
+        className="cards-list_row_img"
+        src={`https://www.artic.edu/iiif/2/${props.image_id}/full/843,/0/default.jpg`}
+        alt={props.title}
+        loading="lazy"
+      />
+      <h3>
+        <i>{props.artist_title}</i>
+      </h3>
+      <h3>
+        <i>{props.title}</i>
+      </h3>
     </li>
   );
 };

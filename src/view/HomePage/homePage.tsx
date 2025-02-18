@@ -1,4 +1,3 @@
-
 import './style.scss';
 import { Search } from '../../Components/Search/search';
 import { Card, IData } from '../../Components/Card/card';
