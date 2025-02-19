@@ -11,20 +11,21 @@ import { store } from './Store/store.tsx';
 const isProduction = process.env.NODE_ENV === 'production';
 const basename = isProduction ? '/re-react-app' : '/';
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <App />,
+      errorElement: <NotFound />,
+    },
+    {
+      path: '*',
+      element: <NotFound />,
+    },
+  ],
   {
-    path: '/',
-    element: <App />,
-    errorElement: <NotFound />,
-  },
-  {
-    path: '*',
-    element: <NotFound />,
-  },
- ],
- {
-   basename: basename, 
- }
+    basename: basename,
+  }
 );
 
 createRoot(document.getElementById('root') as Element).render(
