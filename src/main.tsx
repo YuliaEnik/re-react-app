@@ -9,7 +9,7 @@ import { NotFound } from './view/NotFound/index.tsx';
 import { store } from './Store/store.tsx';
 
 const isProduction = process.env.NODE_ENV === 'production';
-const basename = isProduction ? '/re-react-app' : '/';
+const basename = isProduction ? 're-react-app' : '/';
 
 const router = createBrowserRouter(
   [
