@@ -14,25 +14,23 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
     props.onSubmit(input);
   };
   return (
-    <header className="header">
-      <div className="search">
-        <form
-          className="search"
-          data-testid="search-form"
-          onSubmit={handleSubmit}
-        >
-          <input
-            type="text"
-            name="search"
-            className="search-form_input"
-            placeholder="Search..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <button type="submit" className="search-button" />
-        </form>
-      </div>
-    </header>
+    <div className="search">
+      <form
+        className="search-form"
+        data-testid="search-form"
+        onSubmit={handleSubmit}
+      >
+        <input
+          type="text"
+          name="search"
+          className="search-form_input"
+          placeholder="Search..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        {/* <button type="submit" className="search-button" /> */}
+      </form>
+    </div>
   );
 };
 

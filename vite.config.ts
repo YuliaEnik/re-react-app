@@ -18,9 +18,9 @@ export default defineConfig({
     ],
   },
   plugins: [react()],
-  /* server: {
+  server: {
     port: 4173,
-  }, */
-  base: '/re-react-app/',
+  },
+  //base: '/re-react-app/',
   publicDir: 'public',
 });

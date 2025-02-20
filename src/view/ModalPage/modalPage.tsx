@@ -3,7 +3,7 @@ import { CardModal } from '../../Components/CardModal/cardModal';
 import { useGetArtworkDetailsQuery } from '../../service/getApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../Store/store';
-import { closeModal } from '../../Components/Actions/modalActions';
+import { closeModal } from '../../Actions/modalActions';
 
 export interface IModal {
   id: string;

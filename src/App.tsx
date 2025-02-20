@@ -1,7 +1,34 @@
+import { useContext } from 'react';
+import './App.scss';
+
+import { ThemeButton } from './Components/ButtonTheme/buttonTheme';
+import {
+  ThemeContext,
+  ThemeProvider,
+} from './Components/ThemeContext/ThemeContext';
 import { HomePage } from './view/HomePage/homePage';
 
 export function App(): JSX.Element {
-  return <HomePage />;
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+}
+
+export function AppContent(): JSX.Element {
+  const { theme } = useContext(ThemeContext);
+
+  return (
+    <div className={theme}>
+      <header className="header">
+        <ThemeButton />
+      </header>
+      <main className="main">
+        <HomePage />
+      </main>
+    </div>
+  );
 }
 
 export default App;

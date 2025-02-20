@@ -1,6 +1,6 @@
 import './style.scss';
 import { useDispatch } from 'react-redux';
-import { openModal } from '../Actions/modalActions';
+import { openModal } from '../../Actions/modalActions';
 
 export interface IData {
   id: number;

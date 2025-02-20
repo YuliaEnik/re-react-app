@@ -1,3 +1,5 @@
+@import '/src/App.scss';
+
 .modal-wrapper-close {
   position: fixed;
   display: flex;
@@ -28,9 +30,10 @@
   flex-direction: column;
   padding: 1rem;
   gap: 1rem;
-  box-shadow: 0 0 10px 5px rgb(221, 221, 221);
+  box-shadow: $box-shadow;
   border-radius: 10px;
   font-size: 0.8rem;
+  background-color: rgb(249, 249, 249, 0.4);
 }
 
 .modal-header {
@@ -41,7 +44,6 @@
 }
 
 .modal-body {
-  min-height: 100%;
   width: 100%;
   padding: 0.5rem;
   display: flex;

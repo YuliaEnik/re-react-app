@@ -42,40 +42,34 @@ export function HomePage(): JSX.Element {
   };
 
   return (
-    <main className="main">
-      <div className="home-page">
-        <Search onSubmit={handleSearchSubmit} initialQuery={query} />
-        <div className="cards-list-page">
-          <ul className="cards-list">
-            {(isAllLoading || isSearchLoading) && (
-              <p className="loading">Loading...</p>
-            )}
-            {(isAllError || isSearchError) && (
-              <p className="loading">Error loading data</p>
-            )}
-            {artList && artList.data && (
-              <>
-                <li className="cards-list_row title">
-                  <h4>Image</h4>
-                  <h4>Author</h4>
-                  <h4>Name</h4>
-                </li>
-                {artList.data.map((data: IData) => (
-                  <Card {...data} key={data.id} onClick={() => {}} />
-                ))}
-              </>
-            )}
-          </ul>
-          {artList && artList.pagination && (
-            <Pagination
-              page={page}
-              totalPages={artList.pagination.total_pages}
-              onPageChange={handlePageChange}
-            />
+    <div className="home-page">
+      <Search onSubmit={handleSearchSubmit} initialQuery={query} />
+      <div className="cards-list-page">
+        <ul className="cards-list">
+          {(isAllLoading || isSearchLoading) && <p>Loading...</p>}
+          {(isAllError || isSearchError) && <p>Error loading data</p>}
+          {artList && artList.data && (
+            <>
+              <li className="cards-list_row title">
+                <h4>Image</h4>
+                <h4>Author</h4>
+                <h4>Name</h4>
+              </li>
+              {artList.data.map((data: IData) => (
+                <Card {...data} key={data.id} onClick={() => {}} />
+              ))}
+            </>
           )}
-        </div>
-        {isOpen && <ModalPage />}
+        </ul>
+        {artList && artList.pagination && (
+          <Pagination
+            page={page}
+            totalPages={artList.pagination.total_pages}
+            onPageChange={handlePageChange}
+          />
+        )}
       </div>
-    </main>
+      {isOpen && <ModalPage />}
+    </div>
   );
 }

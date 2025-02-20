@@ -1,7 +1,7 @@
 import { configureStore, Middleware } from '@reduxjs/toolkit';
 import searchSliceReducer from './slices';
 import { artworksApi } from '../service/getApi';
-import modalReducer from '../Components/Reducers/modalReducer';
+import modalReducer from '../Reducers/modalReducer';
 
 const localStorageMiddleware: Middleware = (store) => (next) => (action) => {
   const result = next(action);
