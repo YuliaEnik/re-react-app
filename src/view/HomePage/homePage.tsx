@@ -2,7 +2,7 @@ import './style.scss';
 import { Search } from '../../Components/Search/search';
 import { Card, IData } from '../../Components/Card/card';
 import { Pagination } from '../../Components/Pagination/pagination';
-import { useNavigate } from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 import {
   useGetAllArtworksQuery,
   useSearchArtworksQuery,
@@ -11,12 +11,27 @@ import { ModalPage } from '../ModalPage/modalPage';
 import { setPage, setQuery } from '../../Store/slices';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../Store/store';
+import { useEffect } from 'react';
 
 export function HomePage(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { query, page } = useSelector((state: RootState) => state.search);
   const { isOpen } = useSelector((state: RootState) => state.modal);
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const urlQuery = searchParams.get('query') || '';
+    const urlPage = Number(searchParams.get('page')) || 1;
+
+    if (urlQuery !== query) {
+      dispatch(setQuery(urlQuery));
+    }
+    if (urlPage !== page) {
+      dispatch(setPage(urlPage));
+    }
+  }, [dispatch, searchParams, query, page]);
+
   const {
     data: allArtworks,
     isLoading: isAllLoading,
@@ -33,12 +48,12 @@ export function HomePage(): JSX.Element {
 
   const handleSearchSubmit = (searchValue: string) => {
     dispatch(setQuery(searchValue));
-    navigate(`?page=${1}`);
+    navigate(`?query=${searchValue}&page=${1}`);
   };
 
   const handlePageChange = (newPage: number) => {
     dispatch(setPage(newPage));
-    navigate(`?page=${newPage}`);
+    navigate(`?query=${query}&page=${newPage}`);
   };
 
   return (
@@ -50,7 +65,7 @@ export function HomePage(): JSX.Element {
           {(isAllError || isSearchError) && <p>Error loading data</p>}
           {artList && artList.data && (
             <>
-              <li className="cards-list_row title">
+              <li className="title">
                 <h4>Image</h4>
                 <h4>Author</h4>
                 <h4>Name</h4>

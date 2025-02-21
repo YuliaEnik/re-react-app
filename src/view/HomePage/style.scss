@@ -1,6 +1,8 @@
+@import '/src/App.scss';
+
 .home-page {
   width: 100%;
-  padding: 6rem;
+  padding: 5rem 3rem 3rem 3rem;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -8,7 +10,7 @@
 
 .cards-list-page {
   height: 100%;
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -39,10 +41,9 @@
   padding: 0.2rem;
   display: grid;
   grid-template-columns: 15% 20% 65%;
+  align-items: center;
+  border-radius: 0.5rem;
+  box-shadow: $box-shadow;
   font-size: 1rem;
   background-color: #d0d0d0;
-}
-
-.title > h4 {
-  padding-left: 1rem;
 }

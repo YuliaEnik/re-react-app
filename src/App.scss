@@ -14,7 +14,7 @@ $art-background: #f9f9f9;
 $art-text: #000000;
 
 $box-shadow: 0 0 0.5rem 0.2rem rgba(189, 187, 187, 0.5);
-$opacityBG: 0.3;
+$opacityBG: 0.5;
 
 @mixin theme-colors($background, $text) {
   background-color: $background;
@@ -25,6 +25,7 @@ $opacityBG: 0.3;
   background-image: url($image);
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 
 .light {
