@@ -1,0 +1,18 @@
+@import '/src/App.scss';
+
+.theme-button {
+  height: 3rem;
+  width: 5rem;
+  border: none;
+  outline: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #f9f9f9;
+  box-shadow: $box-shadow;
+  transition: 0.5s;
+  color: black;
+  cursor: pointer;
+}
+.theme-button:hover {
+  transform: scale(1.05);
+}

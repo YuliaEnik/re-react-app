@@ -1,0 +1,56 @@
+@import '/src/App.scss';
+
+.search {
+  height: 3.1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transition: all 0.8s ease;
+  &-form_input {
+    height: 100%;
+    padding: 0 1rem 0 3rem;
+    font-size: 1rem;
+    box-shadow: $box-shadow;
+    background-color: rgb(249, 249, 249, 0.6);
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+    color: black;
+    background-position: 0.5rem center;
+    cursor: pointer;
+    transition: all 0.8s ease;
+    &:active,
+    :hover,
+    :focus {
+      outline: none;
+      outline-offset: none;
+      transform: scale(1.05);
+    }
+  }
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* @media (min-width: 1280px) {
+  .search {
+    width: 80rem;
+  }
+} */
+
+/* .search-button {
+  height: 3rem;
+  width: 5rem;
+  border: none;
+  outline: none;
+  background-image: url(/search.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #fcf8f8;
+  box-shadow: 0 .3rem 1rem 0  rgb(197, 195, 195);
+  transition: 0.5s;
+}
+.search-button:hover {
+  transform: translate(0,-3px);
+  box-shadow: 0 20px 40px 0 rgb(197, 195, 195);
+} */
