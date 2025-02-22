@@ -7,13 +7,13 @@
   grid-template-columns: 95% 5%;
   align-items: center;
   font-size: 0.7rem;
-  background-color: rgb(249, 249, 249, 0.5);
+  background-color: rgb(249, 249, 249, 0.6);
   border-radius: 0.5rem;
   box-shadow: $box-shadow;
   transition: all 0.8s;
   &:hover {
     transform: scale(1.01);
-    background-color: #e8e8e8;
+    background-color: rgba(209, 207, 207, 0.9);
   }
   &_img {
     height: 2.8rem;

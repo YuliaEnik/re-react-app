@@ -1,5 +1,5 @@
 export interface IData {
-  id?: number;
+  id: number;
   title?: string;
   artist_title?: string;
   date_display?: string;

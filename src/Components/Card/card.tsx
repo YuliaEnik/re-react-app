@@ -1,8 +1,9 @@
 import './style.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../Actions/modalActions';
 import { Checkbox } from '../Checkbox/checkbox';
-import { useState } from 'react';
+import { ISelectedData, toggleCard } from '../../Store/selectedCards';
+import { RootState } from '../../Store/store';
 
 export interface IData {
   id: number;
@@ -10,17 +11,19 @@ export interface IData {
   title: string;
   date_display: string;
   image_id: string;
-  onClick?: () => void;
 }
 
 const Card: React.FC<IData> = (props: IData) => {
   const dispatch = useDispatch();
-  const [isChecked, setIsChecked] = useState(false);
+  const selectedCards = useSelector(
+    (state: RootState) => state.selectedCards.data
+  );
+  const isChecked = selectedCards.some((c: ISelectedData) => c.id === props.id);
 
   const handleCheckboxChange = () => {
-    setIsChecked((prev) => !prev);
-    console.log(props.id);
+    dispatch(toggleCard(props));
   };
+
   const handleClick = () => {
     dispatch(openModal({ id: props.id }));
   };

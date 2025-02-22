@@ -8,13 +8,13 @@ $light-background: #f9f9f9;
 $light-text: #000000;
 
 $dark-background: #11111e;
-$dark-text: #ffffff;
+$dark-text: #e4e2e2;
 
 $art-background: #f9f9f9;
 $art-text: #000000;
 
 $box-shadow: 0 0 0.5rem 0.2rem rgba(189, 187, 187, 0.5);
-$opacityBG: 0.5;
+$opacityBG: 0.6;
 
 @mixin theme-colors($background, $text) {
   background-color: $background;

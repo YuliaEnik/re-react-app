@@ -71,7 +71,7 @@ export function HomePage(): JSX.Element {
                 <h4>Name</h4>
               </li>
               {artList.data.map((data: IData) => (
-                <Card {...data} key={data.id} onClick={() => {}} />
+                <Card {...data} key={data.id} />
               ))}
             </>
           )}
