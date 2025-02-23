@@ -1,0 +1,86 @@
+@import '/src/App.scss';
+
+.selected-overlay {
+  max-width: 100%;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  box-shadow: $box-shadow;
+  gap: 1rem;
+  font-size: 0.6rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.selected-content {
+  display: flex;
+  max-width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.img {
+  height: 2rem;
+  width: 3rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.selected-list {
+  height: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.selected-card {
+  width: 15rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: $box-shadow;
+  background-color: rgb(249, 249, 249, 0.7);
+  gap: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 0.7s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-action-button {
+  padding: 10px 20px;
+  color: black;
+  border: none;
+  border-radius: 0.5rem;
+  border: solid 0.01rem grey;
+  cursor: pointer;
+}
+
+.modal-action-button:hover {
+  background-color: rgba(209, 207, 207, 0.9);
+}

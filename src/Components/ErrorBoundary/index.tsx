@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
 import './style.scss';
+import React, { ReactNode } from 'react';
 
 interface ErrorBoundaryState {
   isError: boolean;

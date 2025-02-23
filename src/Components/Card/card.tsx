@@ -2,7 +2,7 @@ import './style.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../Actions/modalActions';
 import { Checkbox } from '../Checkbox/checkbox';
-import { ISelectedData, toggleCard } from '../../Store/selectedCards';
+import { ISelectedData, toggleCard } from '../../Reducers/selectedCardsReducer';
 import { RootState } from '../../Store/store';
 
 export interface IData {

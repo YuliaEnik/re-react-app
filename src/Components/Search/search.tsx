@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import './style.scss';
+import { useState } from 'react';
 
 export interface SearchProps {
   onSubmit: (searchValue: string) => void;
@@ -28,7 +28,6 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        {/* <button type="submit" className="search-button" /> */}
       </form>
     </div>
   );

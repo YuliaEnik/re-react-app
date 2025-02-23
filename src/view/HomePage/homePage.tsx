@@ -8,10 +8,13 @@ import {
   useSearchArtworksQuery,
 } from '../../service/getApi';
 import { ModalPage } from '../ModalPage/modalPage';
-import { setPage, setQuery } from '../../Store/slices';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../Store/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { setPage, setQuery } from '../../Reducers/searchReducer';
+import SelectedCards from '../../Components/SelectedCards/selectedCards';
+import { toggleCard } from '../../Reducers/selectedCardsReducer';
+import { downloadCsv } from '../../service/downloadCsv';
 
 export function HomePage(): JSX.Element {
   const navigate = useNavigate();
@@ -19,6 +22,11 @@ export function HomePage(): JSX.Element {
   const { query, page } = useSelector((state: RootState) => state.search);
   const { isOpen } = useSelector((state: RootState) => state.modal);
   const [searchParams] = useSearchParams();
+  const [isSelectOpen, setIsSelectOpen] = useState(false);
+
+  const selectedCards = useSelector(
+    (state: RootState) => state.selectedCards.data
+  );
 
   useEffect(() => {
     const urlQuery = searchParams.get('query') || '';
@@ -30,7 +38,13 @@ export function HomePage(): JSX.Element {
     if (urlPage !== page) {
       dispatch(setPage(urlPage));
     }
-  }, [dispatch, searchParams, query, page]);
+
+    if (selectedCards.length > 0) {
+      setIsSelectOpen(true);
+    } else {
+      setIsSelectOpen(false);
+    }
+  }, [dispatch, searchParams, query, page, selectedCards]);
 
   const {
     data: allArtworks,
@@ -56,8 +70,18 @@ export function HomePage(): JSX.Element {
     navigate(`?query=${query}&page=${newPage}`);
   };
 
+  const handleUnselectAll = () => {
+    selectedCards.forEach((card) => {
+      dispatch(toggleCard(card));
+    });
+  };
+
+  const handleDownload = () => {
+    downloadCsv(selectedCards);
+  };
+
   return (
-    <div className="home-page">
+    <section className="home-page">
       <Search onSubmit={handleSearchSubmit} initialQuery={query} />
       <div className="cards-list-page">
         <ul className="cards-list">
@@ -84,7 +108,14 @@ export function HomePage(): JSX.Element {
           />
         )}
       </div>
-      {isOpen && <ModalPage />}
-    </div>
+      <section className="modal-wrapper">{isOpen && <ModalPage />}</section>
+      {isSelectOpen && (
+        <SelectedCards
+          selectedCards={selectedCards}
+          onUnselectAll={handleUnselectAll}
+          onDownload={handleDownload}
+        />
+      )}
+    </section>
   );
 }

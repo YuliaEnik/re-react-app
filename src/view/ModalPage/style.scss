@@ -10,13 +10,6 @@
   z-index: 10;
 }
 
-.modal-wrapper {
-  height: 100%;
-  width: 37%;
-  display: flex;
-  justify-content: center;
-}
-
 @media (max-width: 620px) {
   .modal-wrapper {
     width: 100%;
@@ -33,7 +26,18 @@
   box-shadow: $box-shadow;
   border-radius: 10px;
   font-size: 0.8rem;
-  background-color: rgb(249, 249, 249, 0.5);
+  background-color: rgb(249, 249, 249, 0.7);
+  opacity: 0;
+  animation: fadeIn 0.7s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-header {

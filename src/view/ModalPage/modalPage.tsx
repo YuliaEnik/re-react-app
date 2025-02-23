@@ -35,7 +35,7 @@ const ModalPage: React.FC = () => {
   if (!artwork || !artwork.data) return <p>No artwork data available</p>;
 
   return (
-    <section className="modal-wrapper">
+    <>
       {artwork.data && (
         <div
           className="modal-content"
@@ -53,7 +53,7 @@ const ModalPage: React.FC = () => {
           </div>
         </div>
       )}
-    </section>
+    </>
   );
 };
 

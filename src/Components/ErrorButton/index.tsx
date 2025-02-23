@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import './style.scss';
+import React, { useState } from 'react';
 
 export const ErrorButton: React.FC = () => {
   const [isError, setIsError] = useState(false);

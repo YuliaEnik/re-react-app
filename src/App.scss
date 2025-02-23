@@ -1,14 +1,8 @@
-#root {
-  height: 100%;
-  width: 100%;
-  margin: 0 auto;
-}
-
 $light-background: #f9f9f9;
 $light-text: #000000;
 
 $dark-background: #11111e;
-$dark-text: #e4e2e2;
+$dark-text: #4a4848;
 
 $art-background: #f9f9f9;
 $art-text: #000000;
@@ -29,6 +23,7 @@ $opacityBG: 0.6;
 }
 
 .light {
+  min-height: 100vh;
   @include theme-colors($light-background, $light-text);
   .header {
     @include theme-colors($light-background, $light-text);
@@ -36,6 +31,7 @@ $opacityBG: 0.6;
 }
 
 .dark {
+  min-height: 100vh;
   @include theme-colors($dark-background, $dark-text);
   .header {
     @include theme-colors($dark-background, $dark-text);
@@ -43,6 +39,7 @@ $opacityBG: 0.6;
 }
 
 .art {
+  min-height: 100vh;
   @include theme-colors($art-background, $art-text);
 
   .header {
@@ -50,7 +47,7 @@ $opacityBG: 0.6;
   }
 
   .main {
-    @include background-image('/artmainbg.jpg');
+    @include background-image('/mainartbg1.jpg');
   }
 }
 
@@ -69,6 +66,7 @@ $opacityBG: 0.6;
 }
 
 .main {
+  min-height: 100vh;
   padding-top: 3rem;
   width: 100%;
   display: flex;
