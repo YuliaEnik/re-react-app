@@ -30,17 +30,22 @@ const Card: React.FC<IData> = (props: IData) => {
 
   return (
     <li className="cards-list_row" data-testid="card">
-      <div className="card-content" onClick={handleClick}>
+      <div
+        className="card-content"
+        onClick={handleClick}
+        data-testid="card-content"
+      >
         <img
           className="cards-list_row_img"
           src={`https://www.artic.edu/iiif/2/${props.image_id}/full/843,/0/default.jpg`}
           alt={props.title}
           loading="lazy"
+          data-testid="card-image"
         />
-        <h3>
+        <h3 data-testid="card-artist">
           <i>{props.artist_title}</i>
         </h3>
-        <h3>
+        <h3 data-testid="card-title">
           <i>{props.title}</i>
         </h3>
       </div>

@@ -10,7 +10,7 @@ import {
 import { ModalPage } from '../ModalPage/modalPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../Store/store';
-import { useEffect, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 import { setPage, setQuery } from '../../Reducers/searchReducer';
 import SelectedCards from '../../Components/SelectedCards/selectedCards';
 import { toggleCard } from '../../Reducers/selectedCardsReducer';

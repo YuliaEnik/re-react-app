@@ -15,7 +15,9 @@ const SelectedCards: React.FC<ISelectedProps> = (props: ISelectedProps) => {
   return (
     <section className="selected-overlay">
       <div className="selected-content">
-        <h2> Selected {props.selectedCards.length} cards </h2>
+        <h2 className="selected-title">
+          Selected {props.selectedCards.length} cards
+        </h2>
         <div className="modal-actions">
           <button onClick={props.onUnselectAll} className="modal-action-button">
             Unselect all

@@ -10,6 +10,11 @@ import reactCompiler from 'eslint-plugin-react-compiler';
 export default tseslint.config(
   { ignores: ['dist'] },
   {
+    "env": {
+      "jest": true
+    }
+  },
+  {
     extends: [
       js.configs.recommended,
       ...tseslint.configs.strict,

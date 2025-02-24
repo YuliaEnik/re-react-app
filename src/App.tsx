@@ -1,5 +1,5 @@
 import './App.scss';
-import { useContext } from 'react';
+import { JSX, useContext } from 'react';
 import { ThemeButton } from './Components/ButtonTheme/buttonTheme';
 import {
   ThemeContext,

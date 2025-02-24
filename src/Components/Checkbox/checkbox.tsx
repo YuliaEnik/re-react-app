@@ -10,7 +10,7 @@ const Checkbox: React.FC<ICheckbox> = (props: ICheckbox) => {
   const idCheckbox = String(props.id);
 
   return (
-    <div className="checkbox">
+    <div className="checkbox" data-testid="checkbox">
       <input
         type="checkbox"
         id={idCheckbox}

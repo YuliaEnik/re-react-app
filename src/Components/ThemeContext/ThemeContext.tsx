@@ -1,16 +1,12 @@
-import { createContext, ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
+import { ThemeContext } from '../../Actions/themeActions';
 
 type ThemeKey = 'light' | 'dark' | 'art';
 
-type ThemeContextType = {
+export type ThemeContextType = {
   theme: ThemeKey;
   toggleTheme: () => void;
 };
-
-const ThemeContext = createContext<ThemeContextType>({
-  theme: 'light',
-  toggleTheme: () => {},
-});
 
 type ThemeProviderProps = {
   children: ReactNode;
