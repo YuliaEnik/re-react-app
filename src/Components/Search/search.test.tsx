@@ -13,20 +13,6 @@ describe('Search Component', () => {
     expect(inputElement).toHaveValue(initialQuery);
   });
 
-  /* test('calls onSubmit with the input value when form is submitted', () => {
-    const handleSubmit = jest.fn();
-    render(<Search onSubmit={handleSubmit} />);
-
-    const inputElement = screen.getByRole('textbox');
-    const formElement = screen.getByTestId('search-form');
-
-    fireEvent.change(inputElement, { target: { value: 'test query' } });
-    fireEvent.submit(formElement);
-
-    expect(handleSubmit).toHaveBeenCalledTimes(1);
-    expect(handleSubmit).toHaveBeenCalledWith('test query');
-  });
- */
   test('updates input value when typing', () => {
     render(<Search onSubmit={() => {}} />);
 

@@ -1,6 +1,3 @@
-import { stringify } from 'csv-stringify/browser/esm';
-import { saveAs } from 'file-saver';
-
 export interface ISelectedData {
   title: string;
   artist_title: string;
@@ -16,24 +13,29 @@ export const downloadCsv = (
     alert('No data');
     return;
   }
-  const csvData = selectedCards.map((card) => ({
-    name: card.title,
-    artist: card.artist_title,
-    image_id: card.image_id,
-    url: `https://www.artic.edu/iiif/2/${card.image_id}/full/843,/0/default.jpg`,
-  }));
 
-  stringify(csvData, { header: true }, (err, output) => {
-    if (err) {
-      console.error('Error generating CSV:', err);
-      alert('Failed to create CSV file.');
-      return;
-    }
+  const headers = ['name', 'artist', 'image_id', 'url'];
+  const csvRows = selectedCards.map((card) => [
+    card.title,
+    card.artist_title,
+    card.image_id,
+    `https://www.artic.edu/iiif/2/${card.image_id}/full/843,/0/default.jpg`,
+  ]);
 
-    const blob = new Blob([output], { type: 'text/csv;charset=utf-8;' });
+  const csvContent = [
+    headers.join(','),
+    ...csvRows.map((row) => row.join(',')),
+  ].join('\n');
 
-    const finalFilename = filename || `${selectedCards.length}_artworks.csv`;
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
 
-    saveAs(blob, finalFilename);
-  });
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename || `${selectedCards.length}_artworks.csv`;
+  document.body.appendChild(link);
+  link.click();
+
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 };
