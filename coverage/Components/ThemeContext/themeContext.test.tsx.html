@@ -174,15 +174,7 @@
 <a name='L109'></a><a href='#L109'>109</a>
 <a name='L110'></a><a href='#L110'>110</a>
 <a name='L111'></a><a href='#L111'>111</a>
-<a name='L112'></a><a href='#L112'>112</a>
-<a name='L113'></a><a href='#L113'>113</a>
-<a name='L114'></a><a href='#L114'>114</a>
-<a name='L115'></a><a href='#L115'>115</a>
-<a name='L116'></a><a href='#L116'>116</a>
-<a name='L117'></a><a href='#L117'>117</a>
-<a name='L118'></a><a href='#L118'>118</a>
-<a name='L119'></a><a href='#L119'>119</a>
-<a name='L120'></a><a href='#L120'>120</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L112'></a><a href='#L112'>112</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -190,7 +182,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -207,7 +198,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -226,7 +216,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -237,7 +226,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -259,18 +247,15 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -288,7 +273,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -304,12 +288,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import '@testing-library/jest-dom/vitest';
 import { describe, it, expect } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { ThemeProvider, ThemeContext } from './themeContext'; 
+import { ThemeProvider, ThemeContext } from './themeContext';
 import { useContext } from 'react';
 &nbsp;
 describe('ThemeProvider Component', () =&gt; {
   it('provides the initial theme as "light"', () =&gt; {
-&nbsp;
     const TestComponent = () =&gt; {
       const { theme } = useContext(ThemeContext);
       return &lt;div data-testid="theme"&gt;{theme}&lt;/div&gt;;
@@ -326,7 +309,6 @@ describe('ThemeProvider Component', () =&gt; {
   });
 &nbsp;
   it('toggles the theme from "light" to "dark"', () =&gt; {
-&nbsp;
     const TestComponent = () =&gt; {
       const { theme, toggleTheme } = useContext(ThemeContext);
       return (
@@ -344,7 +326,6 @@ describe('ThemeProvider Component', () =&gt; {
         &lt;TestComponent /&gt;
       &lt;/ThemeProvider&gt;
     );
-&nbsp;
 &nbsp;
     const themeElement = screen.getByTestId('theme');
     expect(themeElement).toHaveTextContent('light');
@@ -356,7 +337,6 @@ describe('ThemeProvider Component', () =&gt; {
   });
 &nbsp;
   it('toggles the theme from "dark" to "art"', () =&gt; {
-&nbsp;
     const TestComponent = () =&gt; {
       const { theme, toggleTheme } = useContext(ThemeContext);
       return (
@@ -378,18 +358,15 @@ describe('ThemeProvider Component', () =&gt; {
     const toggleButton = screen.getByTestId('toggle-theme');
     fireEvent.click(toggleButton);
 &nbsp;
-&nbsp;
     const themeElement = screen.getByTestId('theme');
     expect(themeElement).toHaveTextContent('dark');
 &nbsp;
     fireEvent.click(toggleButton);
 &nbsp;
-&nbsp;
     expect(themeElement).toHaveTextContent('art');
   });
 &nbsp;
   it('toggles the theme from "art" back to "light"', () =&gt; {
-&nbsp;
     const TestComponent = () =&gt; {
       const { theme, toggleTheme } = useContext(ThemeContext);
       return (
@@ -407,7 +384,6 @@ describe('ThemeProvider Component', () =&gt; {
         &lt;TestComponent /&gt;
       &lt;/ThemeProvider&gt;
     );
-&nbsp;
 &nbsp;
     const toggleButton = screen.getByTestId('toggle-theme');
     fireEvent.click(toggleButton);
@@ -427,7 +403,7 @@ describe('ThemeProvider Component', () =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-24T21:44:09.912Z
+                at 2025-02-25T16:19:07.280Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
