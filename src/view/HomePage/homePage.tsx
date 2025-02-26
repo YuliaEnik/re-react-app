@@ -10,11 +10,11 @@ import {
 import { ModalPage } from '../ModalPage/modalPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../Store/store';
-import { JSX, useEffect, useState } from 'react';
+import { JSX, useEffect /* , useState  */ } from 'react';
 import { setPage, setQuery } from '../../Reducers/searchReducer';
 import SelectedCards from '../../Components/SelectedCards/selectedCards';
-import { toggleCard } from '../../Reducers/selectedCardsReducer';
-import { downloadCsv } from '../../service/downloadCsv';
+//import { toggleCard } from '../../Reducers/selectedCardsReducer';
+//import { downloadCsv } from '../../service/downloadCsv';
 
 export function HomePage(): JSX.Element {
   const navigate = useNavigate();
@@ -22,11 +22,7 @@ export function HomePage(): JSX.Element {
   const { query, page } = useSelector((state: RootState) => state.search);
   const { isOpen } = useSelector((state: RootState) => state.modal);
   const [searchParams] = useSearchParams();
-  const [isSelectOpen, setIsSelectOpen] = useState(false);
-
-  const selectedCards = useSelector(
-    (state: RootState) => state.selectedCards.data
-  );
+  //const [isSelectOpen, setIsSelectOpen] = useState(false);
 
   useEffect(() => {
     const urlQuery = searchParams.get('query') || '';
@@ -38,13 +34,7 @@ export function HomePage(): JSX.Element {
     if (urlPage !== page) {
       dispatch(setPage(urlPage));
     }
-
-    if (selectedCards.length > 0) {
-      setIsSelectOpen(true);
-    } else {
-      setIsSelectOpen(false);
-    }
-  }, [dispatch, searchParams, query, page, selectedCards]);
+  }, [dispatch, searchParams, query, page]);
 
   const {
     data: allArtworks,
@@ -68,16 +58,6 @@ export function HomePage(): JSX.Element {
   const handlePageChange = (newPage: number) => {
     dispatch(setPage(newPage));
     navigate(`?query=${query}&page=${newPage}`);
-  };
-
-  const handleUnselectAll = () => {
-    selectedCards.forEach((card) => {
-      dispatch(toggleCard(card));
-    });
-  };
-
-  const handleDownload = () => {
-    downloadCsv(selectedCards);
   };
 
   return (
@@ -109,13 +89,7 @@ export function HomePage(): JSX.Element {
         )}
       </div>
       <section className="modal-wrapper">{isOpen && <ModalPage />}</section>
-      {isSelectOpen && (
-        <SelectedCards
-          selectedCards={selectedCards}
-          onUnselectAll={handleUnselectAll}
-          onDownload={handleDownload}
-        />
-      )}
+      <SelectedCards />
     </section>
   );
 }

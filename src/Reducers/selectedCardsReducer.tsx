@@ -30,9 +30,12 @@ const selectedCardsSlice = createSlice({
         state.data.splice(index, 1);
       }
     },
+    cleanSelectedCards: (state) => {
+      state.data = [];
+    },
   },
 });
 
-export const { toggleCard } = selectedCardsSlice.actions;
+export const { toggleCard, cleanSelectedCards } = selectedCardsSlice.actions;
 export const selectedCardsSliceReducer = selectedCardsSlice.reducer;
 export default selectedCardsSliceReducer;
