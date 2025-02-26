@@ -1,0 +1,31 @@
+.search {
+  height: 3.1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transition: all 0.8s ease;
+  &-form_input {
+    height: 100%;
+    padding: 0 1rem 0 3rem;
+    font-size: 1rem;
+    box-shadow: 0 0 0.5rem 0.2rem rgba(189, 187, 187, 0.5);
+    background-color: rgb(249, 249, 249, 0.6);
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+    color: black;
+    background-position: 0.5rem center;
+    cursor: pointer;
+    transition: all 0.8s ease;
+    &:active,
+    :hover,
+    :focus {
+      outline: none;
+      outline-offset: none;
+      transform: scale(1.05);
+    }
+  }
+  &:hover {
+    transform: scale(1.05);
+  }
+}
