@@ -4,7 +4,9 @@ interface SearchState {
   page: number;
 }
 
-const savedState = localStorage.getItem('searchState');
+const savedState =
+  typeof window !== 'undefined' ? localStorage.getItem('searchState') : null;
+  
 const initialState: SearchState = savedState
   ? JSON.parse(savedState)
   : { query: '', page: 1 };

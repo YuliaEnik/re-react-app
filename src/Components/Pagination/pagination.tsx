@@ -1,3 +1,5 @@
+import styles from './style.module.scss';
+
 type Props = {
   page: number;
   totalPages: number;
@@ -16,7 +18,7 @@ export const Pagination = ({ page, totalPages, onPageChange }: Props) => {
   };
 
   return (
-    <div className="pagination">
+    <div className={styles.pagination}>
       <button onClick={() => handlePrevPage()} disabled={page === 1}>
         &laquo;
       </button>

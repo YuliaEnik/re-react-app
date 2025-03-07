@@ -1,4 +1,4 @@
-import './style.scss';
+import styles from './style.module.scss';
 
 export interface IModalCard {
   id: number;
@@ -10,11 +10,11 @@ export interface IModalCard {
   artist_display: string;
 }
 
-export function CardModal(props: IModalCard): JSX.Element {
+export function CardModal(props: IModalCard) {
   return (
     <li data-testid="card-modal">
       <img
-        className="img-modal"
+        className={styles.img_modal}
         src={`https://www.artic.edu/iiif/2/${props.image_id}/full/843,/0/default.jpg`}
         alt={props.title}
         data-testid="card-modal-image"

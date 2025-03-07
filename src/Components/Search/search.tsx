@@ -1,4 +1,4 @@
-import './style.scss';
+import styles from './style.module.scss';
 import { useState } from 'react';
 
 export interface SearchProps {
@@ -14,16 +14,16 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
     props.onSubmit(input);
   };
   return (
-    <div className="search">
+    <div className={styles.search}>
       <form
-        className="search-form"
+        className={styles.search_form}
         data-testid="search-form"
         onSubmit={handleSubmit}
       >
         <input
           type="text"
           name="search"
-          className="search-form_input"
+          className={styles.search_form_input}
           placeholder="Search..."
           value={input}
           onChange={(e) => setInput(e.target.value)}

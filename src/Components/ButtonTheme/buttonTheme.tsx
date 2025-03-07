@@ -1,13 +1,12 @@
-import './style.scss';
-import { ThemeContext } from '../ThemeContext/themeContext';
+import { useTheme } from '../Context/themeProvider';
+import styles from './style.module.scss';
 
-import { useContext } from 'react';
 
 const ThemeButton = () => {
-  const { toggleTheme } = useContext(ThemeContext);
+  const { toggleTheme } = useTheme();
 
   return (
-    <button className="theme-button" onClick={toggleTheme}>
+    <button className={styles.theme_button} onClick={toggleTheme}>
       THEME
     </button>
   );

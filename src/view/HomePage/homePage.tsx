@@ -1,4 +1,4 @@
-import './style.scss';
+/* import './style.scss';
 import { Search } from '../../Components/Search/search';
 import { Card, IData } from '../../Components/Card/card';
 import { Pagination } from '../../Components/Pagination/pagination';
@@ -10,7 +10,7 @@ import {
 import { ModalPage } from '../ModalPage/modalPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../Store/store';
-import { JSX, useEffect /* , useState  */ } from 'react';
+import { JSX, useEffect /* , useState   } from 'react';
 import { setPage, setQuery } from '../../Reducers/searchReducer';
 import SelectedCards from '../../Components/SelectedCards/selectedCards';
 //import { toggleCard } from '../../Reducers/selectedCardsReducer';
@@ -92,4 +92,4 @@ export function HomePage(): JSX.Element {
       <SelectedCards />
     </section>
   );
-}
+} */

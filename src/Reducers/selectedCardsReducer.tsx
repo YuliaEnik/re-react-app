@@ -11,7 +11,7 @@ export interface IStateISelectedData {
   data: ISelectedData[];
 }
 
-const savedSelectedCards = localStorage.getItem('selectedCards');
+const savedSelectedCards = typeof window !== 'undefined' ? localStorage.getItem('selectedCards') : null;
 const initialState: IStateISelectedData = savedSelectedCards
   ? { data: JSON.parse(savedSelectedCards) }
   : { data: [] };

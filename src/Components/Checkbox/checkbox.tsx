@@ -1,4 +1,4 @@
-import './style.scss';
+import styles from './style.module.scss';
 
 export interface ICheckbox {
   id: number;
@@ -10,7 +10,7 @@ const Checkbox: React.FC<ICheckbox> = (props: ICheckbox) => {
   const idCheckbox = String(props.id);
 
   return (
-    <div className="checkbox" data-testid="checkbox">
+    <div className={styles.checkbox} data-testid="checkbox">
       <input
         type="checkbox"
         id={idCheckbox}

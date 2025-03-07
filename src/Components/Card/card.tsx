@@ -1,4 +1,4 @@
-import './style.scss';
+import styles from './style.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../Actions/modalActions';
 import { Checkbox } from '../Checkbox/checkbox';
@@ -29,14 +29,14 @@ const Card: React.FC<IData> = (props: IData) => {
   };
 
   return (
-    <li className="cards-list_row" data-testid="card">
+    <li className={styles.cards_list_row} data-testid="card">
       <div
-        className="card-content"
+        className={styles.content}
         onClick={handleClick}
         data-testid="card-content"
       >
         <img
-          className="cards-list_row_img"
+          className={styles.cards_list_row_img}
           src={`https://www.artic.edu/iiif/2/${props.image_id}/full/843,/0/default.jpg`}
           alt={props.title}
           loading="lazy"
