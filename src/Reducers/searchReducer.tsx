@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-interface SearchState {
+export interface SearchState {
   query: string;
   page: number;
 }

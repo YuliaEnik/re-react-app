@@ -1,7 +1,8 @@
-import '@testing-library/jest-dom/vitest';
+import "@testing-library/jest-dom"; 
 import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ErrorButton } from './';
+import React from 'react';
 
 describe('test error button', () => {
   it('error button renders correctly', () => {

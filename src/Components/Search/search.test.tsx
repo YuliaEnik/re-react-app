@@ -1,7 +1,8 @@
 import { describe, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Search } from './search';
-import '@testing-library/jest-dom/vitest';
+import '@testing-library/jest-dom'; 
+import React from 'react';
 
 describe('Search Component', () => {
   test('renders the search input with initial value', () => {

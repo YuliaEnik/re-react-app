@@ -1,5 +1,6 @@
 import styles from './style.module.scss';
 import { useState } from 'react';
+import React from 'react';
 
 export interface SearchProps {
   onSubmit: (searchValue: string) => void;

@@ -1,59 +1,49 @@
 import styles from './style.module.scss';
 import { CardModal } from '../../Components/CardModal/cardModal';
-import { useGetArtworkDetailsQuery } from '../../service/getApi';
-//import { useDispatch, useSelector } from 'react-redux';
-//import { RootState } from '../../Store/store';
-//import { closeModal } from '../../Actions/modalActions';
-import { useRouter } from 'next/router';
+import router from 'next/router';
+import React from 'react';
 
-export interface IModal {
-  id: string;
-  onClose: () => void;
+export interface ArtworkDetailsProps {
+  artwork: {
+    data: {
+      id: number;
+      title: string;
+      artist_title: string;
+      image_id: string;
+      date_display?: string;
+      artwork_type_title?: string;
+      artist_display?: string;
+    };
+  } | null;
 }
 
-export default function ArtworkDetails() {
-  /* const dispatch = useDispatch();
-  const { isOpen, id } = useSelector((state: RootState) => state.modal);
- */
-  const router = useRouter();
-  const { id } = router.query;
+export default function ArtworkDetails({ artwork }: ArtworkDetailsProps) {
 
-  const {
-    data: artwork,
-    isLoading,
-    isError,
-  } = useGetArtworkDetailsQuery(Number(id), {
-    skip: !id,
-  });
+  if (!artwork || !artwork.data) {
+    return <p>No artwork data available</p>;
+  }
 
-  /* const handleClose = () => {
-    dispatch(closeModal());
+  const artworkData = {
+    ...artwork.data,
+    date_display: artwork.data.date_display || 'Unknown',
+    artwork_type_title: artwork.data.artwork_type_title || 'Unknown',
+    artist_display: artwork.data.artist_display || 'Unknown',
   };
- */
-  //if (!isOpen || !id) return null;
 
-  if (isLoading) return <p>Loading...</p>;
-
-  if (isError) return <p>Error loading artwork details</p>;
-
-  if (!artwork || !artwork.data) return <p>No artwork data available</p>;
+  const handleCloseModal = () => {
+    router.push('/');
+  };
 
   return (
-    /*     <>
-      {artwork.data && ( */
     <div className={styles.modal_content} onClick={(event) => event.stopPropagation()}>
-      <div className={styles.modal_header}>
-        <div className={styles.btn_modal} onClick={() => router.back()}>
+      <div className={styles.modal_header} data-testid="modal-header">
+        <div className={styles.btn_modal} onClick={handleCloseModal} data-testid="close-modal-button">
           <p className={styles.btn_modal__img}>X</p>
         </div>
       </div>
-      <div className={styles.modal_body}>
-        {isLoading && <p>Loading...</p>}
-        {isError && <p>Error loading artwork details</p>}
-        {artwork.data && <CardModal {...artwork.data} />}
+      <div className={styles.modal_body} data-testid="modal-body">
+       <CardModal {...artworkData} />
       </div>
     </div>
-    /* )}
-    </> */
   );
 }

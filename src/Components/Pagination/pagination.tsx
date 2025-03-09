@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './style.module.scss';
 
 type Props = {
@@ -18,12 +19,12 @@ export const Pagination = ({ page, totalPages, onPageChange }: Props) => {
   };
 
   return (
-    <div className={styles.pagination}>
-      <button onClick={() => handlePrevPage()} disabled={page === 1}>
+    <div className={styles.pagination} data-testid="pagination">
+      <button onClick={() => handlePrevPage()} disabled={page === 1} data-testid="prev-button">
         &laquo;
       </button>
       <span> Page {page} </span>
-      <button onClick={() => handleNextPage()} disabled={page === totalPages}>
+      <button onClick={() => handleNextPage()} disabled={page === totalPages} data-testid="next-button">
         &raquo;
       </button>
     </div>

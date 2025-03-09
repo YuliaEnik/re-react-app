@@ -26,13 +26,7 @@ export const artworksApi = createApi({
       }),
     }),
     getArtworkDetails: builder.query({
-      query: (id: number) => ({
-        url: `/${id}`,
-        params: {
-          fields:
-            'id,title,artist_title,image_id,date_display,artwork_type_title,artist_display',
-        },
-      }),
+      query: ({ id, fields }) => `/${id}?fields=${fields}`,
     }),
   }),
 });

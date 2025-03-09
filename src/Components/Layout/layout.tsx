@@ -1,14 +1,14 @@
 import styles from './style.module.scss';
-import { useContext } from 'react';
 import { ThemeButton } from './../ButtonTheme/buttonTheme';
-import { ThemeContext } from './../Context/themeProvider';
+import { useTheme } from '../Context/themeProvider';
+
 
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useTheme();
 
   return (
-    <div className={theme}>
+    <div className={styles[theme]}>
       <header className={styles.header}>
         <ThemeButton />
       </header>

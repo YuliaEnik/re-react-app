@@ -1,34 +1,71 @@
-import '@testing-library/jest-dom';
-import { describe, it, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import React from 'react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import { Pagination } from './pagination';
+import styles from './style.module.scss';
+import '@testing-library/jest-dom'; 
 
-describe('test pagination component', () => {
-  const onPageChangeMock = vi.fn();
-
-  beforeEach(() => {
-    onPageChangeMock.mockClear();
-  });
-
-  it('should navigate to previous page when "Previous" button is clicked', () => {
+describe('Pagination', () => {
+  it('cur page', () => {
+    const onPageChange = vi.fn();
     render(
-      <Pagination totalPages={5} page={3} onPageChange={onPageChangeMock} />
+      <Pagination page={3} totalPages={5} onPageChange={onPageChange} />
     );
 
-    const prevButton = screen.getByText(/«/i);
-    fireEvent.click(prevButton);
-
-    expect(onPageChangeMock).toHaveBeenCalledWith(2);
+    expect(screen.getByText('Page 3')).toBeInTheDocument();
   });
 
-  it('should navigate to next page when "Next" button is clicked', () => {
+  it('prev page', () => {
+    const onPageChange = vi.fn();
     render(
-      <Pagination totalPages={5} page={3} onPageChange={onPageChangeMock} />
+      <Pagination page={2} totalPages={5} onPageChange={onPageChange} />
     );
 
-    const nextButton = screen.getByText(/»/i);
-    fireEvent.click(nextButton);
+    const prevButton = screen.getByTestId('prev-button');
+    prevButton.click();
 
-    expect(onPageChangeMock).toHaveBeenCalledWith(4);
+    expect(onPageChange).toHaveBeenCalledWith(1);
+  });
+
+  it('prev des 1 page ', () => {
+    const onPageChange = vi.fn();
+    render(
+      <Pagination page={1} totalPages={5} onPageChange={onPageChange} />
+    );
+
+    const prevButton = screen.getByTestId('prev-button');
+    expect(prevButton).toBeDisabled();
+  });
+
+  it('next but', () => {
+    const onPageChange = vi.fn();
+    render(
+      <Pagination page={2} totalPages={5} onPageChange={onPageChange} />
+    );
+
+    const nextButton = screen.getByTestId('next-button');
+    nextButton.click();
+
+    expect(onPageChange).toHaveBeenCalledWith(3);
+  });
+
+  it('nexy but des total pages', () => {
+    const onPageChange = vi.fn();
+    render(
+      <Pagination page={5} totalPages={5} onPageChange={onPageChange} />
+    );
+
+    const nextButton = screen.getByTestId('next-button');
+    expect(nextButton).toBeDisabled();
+  });
+
+  it('styles SCSS', () => {
+    const onPageChange = vi.fn();
+    render(
+      <Pagination page={1} totalPages={5} onPageChange={onPageChange} />
+    );
+
+    const pagination = screen.getByTestId('pagination');
+    expect(pagination).toHaveClass(styles.pagination);
   });
 });

@@ -39,7 +39,7 @@ export default function ModalSelectedCards() {
 
   return (
     !!howManySelected && (
-      <section className={styles.selecte_overlay}>
+      <section className={styles.selecte_overlay} data-testid="selected-cards">
         <div className={styles.selected_content}>
           <h2 className={styles.selected_title}>
             Selected {selectedCards.length} cards

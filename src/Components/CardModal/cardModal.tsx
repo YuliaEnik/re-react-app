@@ -1,4 +1,5 @@
 import styles from './style.module.scss';
+import React from 'react';
 
 export interface IModalCard {
   id: number;

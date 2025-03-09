@@ -6,12 +6,15 @@ import selectedCardsSliceReducer from '../Reducers/selectedCardsReducer';
 
 const localStorageMiddleware: Middleware = (store) => (next) => (action) => {
   const result = next(action);
+  
+  if (typeof window !== 'undefined') {
   const state = store.getState();
   localStorage.setItem('searchState', JSON.stringify(state.search));
   localStorage.setItem(
     'selectedCards',
     JSON.stringify(state.selectedCards.data)
   );
+}
   return result;
 };
 

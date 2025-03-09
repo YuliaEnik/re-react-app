@@ -1,9 +1,10 @@
 import styles from './style.module.scss';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModal } from '../../Actions/modalActions';
 import { Checkbox } from '../Checkbox/checkbox';
 import { ISelectedData, toggleCard } from '../../Reducers/selectedCardsReducer';
 import { RootState } from '../../Store/store';
+import { useRouter } from 'next/router';
 
 export interface IData {
   id: number;
@@ -14,6 +15,7 @@ export interface IData {
 }
 
 const Card: React.FC<IData> = (props: IData) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const selectedCards = useSelector(
     (state: RootState) => state.selectedCards.data
@@ -25,7 +27,11 @@ const Card: React.FC<IData> = (props: IData) => {
   };
 
   const handleClick = () => {
-    dispatch(openModal({ id: props.id }));
+    router.push({
+      pathname: '/',
+      query: { ...router.query, artworkId: props.id },
+    });
+
   };
 
   return (

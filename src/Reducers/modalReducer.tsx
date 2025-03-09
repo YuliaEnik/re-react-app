@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { closeModal, openModal } from '../Actions/modalActions';
 
-interface ModalState {
+export interface ModalState {
   isOpen: boolean;
   id: number | null;
 }
