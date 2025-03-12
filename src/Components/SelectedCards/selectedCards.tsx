@@ -1,5 +1,5 @@
 import styles from './style.module.scss';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Store/store';
 import { cleanSelectedCards } from '../../Reducers/selectedCardsReducer';
@@ -11,14 +11,23 @@ export default function ModalSelectedCards() {
   const howManySelected = selectedCards.length;
   const dispatch = useDispatch();
   const linkRef = useRef<HTMLAnchorElement | null>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // Устанавливаем флаг, что код выполняется на клиенте
+  }, []);
 
   const unselectAllCards = () => dispatch(cleanSelectedCards());
 
-  const ondownloadFile = () => {
+  const onDownloadFile = () => {
+    if (!isClient) return; // Не выполняем на сервере
+
     const headers = ['name', 'artist', 'image_id', 'url'];
     const csvRows = selectedCards.map((card) => [
-      card.title,
+      card.id,
       card.artist_title,
+      card.title,
+      card.date_display,
       card.image_id,
       `https://www.artic.edu/iiif/2/${card.image_id}/full/843,/0/default.jpg`,
     ]);
@@ -36,6 +45,9 @@ export default function ModalSelectedCards() {
       linkElement.download = `${howManySelected}_artworks.csv`;
     }
   };
+  if (!isClient) {
+    return null; // На сервере возвращаем null
+  }
 
   return (
     !!howManySelected && (
@@ -51,7 +63,7 @@ export default function ModalSelectedCards() {
             <a
               ref={linkRef}
               className={styles.modal_action_button}
-              onClick={ondownloadFile}
+              onClick={onDownloadFile}
             >
               Download
             </a>

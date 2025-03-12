@@ -1,20 +1,17 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
-import React from 'react';
+'use client';
+import React, { createContext, useContext, useState } from 'react';
 
-type ThemeKey = 'light' | 'dark' | 'art';
+type Theme = 'light' | 'dark' |'art';
 
-type ThemeContextType = {
-  theme: ThemeKey;
+interface ThemeContextType {
+  theme: Theme;
   toggleTheme: () => void;
-};
+}
 
-export const ThemeContext = createContext<ThemeContextType>({
-  theme: 'light',
-  toggleTheme: () => {},
-});
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<ThemeKey>('light');
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  const [theme, setTheme] = useState<Theme>('light');
 
   const toggleTheme = () => {
     setTheme((prevTheme) => {
@@ -30,12 +27,11 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     </ThemeContext.Provider>
   );
 };
-export const useTheme = () => { 
+
+export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
 };
-
-export type { ThemeContextType };

@@ -1,10 +1,10 @@
+'use client';
 import styles from './style.module.scss';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox } from '../Checkbox/checkbox';
 import { ISelectedData, toggleCard } from '../../Reducers/selectedCardsReducer';
 import { RootState } from '../../Store/store';
-import { useRouter } from 'next/router';
 
 export interface IData {
   id: number;
@@ -13,9 +13,11 @@ export interface IData {
   date_display: string;
   image_id: string;
 }
+interface CardProps extends IData {
+  onClick: () => void;
+}
 
-const Card: React.FC<IData> = (props: IData) => {
-  const router = useRouter();
+const Card: React.FC<CardProps> = (props: CardProps) => {
   const dispatch = useDispatch();
   const selectedCards = useSelector(
     (state: RootState) => state.selectedCards.data
@@ -23,15 +25,17 @@ const Card: React.FC<IData> = (props: IData) => {
   const isChecked = selectedCards.some((c: ISelectedData) => c.id === props.id);
 
   const handleCheckboxChange = () => {
-    dispatch(toggleCard(props));
+    dispatch(toggleCard({
+      id: props.id,
+      artist_title: props.artist_title,
+      title: props.title,
+      date_display: props.date_display,
+      image_id: props.image_id,
+  }));
   };
 
   const handleClick = () => {
-    router.push({
-      pathname: '/',
-      query: { ...router.query, artworkId: props.id },
-    });
-
+    props.onClick(); 
   };
 
   return (

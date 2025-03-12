@@ -2,19 +2,26 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface ISelectedData {
   id: number;
-  title: string;
   artist_title: string;
+  title: string;
+  date_display: string;
   image_id: string;
 }
 
 export interface IStateISelectedData {
   data: ISelectedData[];
 }
+const savedSelectedCards = (): ISelectedData[] => {
+  if (typeof window !== 'undefined') {
+    const savedData = localStorage.getItem('selectedCards');
+    return savedData ? JSON.parse(savedData) : [];
+  }
+  return [];
+};
 
-const savedSelectedCards = typeof window !== 'undefined' ? localStorage.getItem('selectedCards') : null;
-const initialState: IStateISelectedData = savedSelectedCards
-  ? { data: JSON.parse(savedSelectedCards) }
-  : { data: [] };
+  const initialState: IStateISelectedData = {
+    data: savedSelectedCards(),
+  };
 
 const selectedCardsSlice = createSlice({
   name: 'selectedCards',

@@ -1,10 +1,10 @@
-import styles from './style.module.scss';
-import { ThemeButton } from './../ButtonTheme/buttonTheme';
+'use client';
+import { ThemeButton } from '../ButtonTheme/buttonTheme';
 import { useTheme } from '../Context/themeProvider';
+import styles from './style.module.scss';
 
 
-
-export function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
 
   return (
@@ -16,5 +16,3 @@ export function Layout({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-
-export default Layout;

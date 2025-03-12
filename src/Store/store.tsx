@@ -1,20 +1,18 @@
 import { configureStore, Middleware } from '@reduxjs/toolkit';
-import searchSliceReducer from '../Reducers/searchReducer';
-import { artworksApi } from '../service/getApi';
-import modalReducer from '../Reducers/modalReducer';
-import selectedCardsSliceReducer from '../Reducers/selectedCardsReducer';
+import modalReducer from '~/Reducers/modalReducer';
+import searchSliceReducer from '~/Reducers/searchReducer';
+import selectedCardsSliceReducer from '~/Reducers/selectedCardsReducer';
+import { artworksApi } from '~/service/getApi';
+
 
 const localStorageMiddleware: Middleware = (store) => (next) => (action) => {
   const result = next(action);
   
   if (typeof window !== 'undefined') {
-  const state = store.getState();
-  localStorage.setItem('searchState', JSON.stringify(state.search));
-  localStorage.setItem(
-    'selectedCards',
-    JSON.stringify(state.selectedCards.data)
-  );
-}
+    const state = store.getState();
+    localStorage.setItem('searchState', JSON.stringify(state.search));
+    localStorage.setItem('selectedCards', JSON.stringify(state.selectedCards.data));
+  }
   return result;
 };
 

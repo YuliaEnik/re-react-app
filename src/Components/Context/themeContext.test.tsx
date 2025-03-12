@@ -1,15 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { ThemeProvider } from './themeProvider';
-import { useContext } from 'react';
-import { ThemeContext } from './themeProvider';
-import "@testing-library/jest-dom"; 
+import { ThemeProvider, useTheme } from './themeProvider';
+import "@testing-library/jest-dom";
 import React from 'react';
 
 describe('ThemeProvider Component', () => {
   it('provides the initial theme as "light"', () => {
     const TestComponent = () => {
-      const { theme } = useContext(ThemeContext);
+      const { theme } = useTheme();
       return <div data-testid="theme">{theme}</div>;
     };
 
@@ -25,7 +23,7 @@ describe('ThemeProvider Component', () => {
 
   it('toggles the theme from "light" to "dark"', () => {
     const TestComponent = () => {
-      const { theme, toggleTheme } = useContext(ThemeContext);
+      const { theme, toggleTheme } = useTheme();
       return (
         <div>
           <div data-testid="theme">{theme}</div>
@@ -53,7 +51,7 @@ describe('ThemeProvider Component', () => {
 
   it('toggles the theme from "dark" to "art"', () => {
     const TestComponent = () => {
-      const { theme, toggleTheme } = useContext(ThemeContext);
+      const { theme, toggleTheme } = useTheme();
       return (
         <div>
           <div data-testid="theme">{theme}</div>
@@ -71,19 +69,18 @@ describe('ThemeProvider Component', () => {
     );
 
     const toggleButton = screen.getByTestId('toggle-theme');
+
+    fireEvent.click(toggleButton);
+
     fireEvent.click(toggleButton);
 
     const themeElement = screen.getByTestId('theme');
-    expect(themeElement).toHaveTextContent('dark');
-
-    fireEvent.click(toggleButton);
-
     expect(themeElement).toHaveTextContent('art');
   });
 
   it('toggles the theme from "art" back to "light"', () => {
     const TestComponent = () => {
-      const { theme, toggleTheme } = useContext(ThemeContext);
+      const { theme, toggleTheme } = useTheme();
       return (
         <div>
           <div data-testid="theme">{theme}</div>
@@ -101,6 +98,7 @@ describe('ThemeProvider Component', () => {
     );
 
     const toggleButton = screen.getByTestId('toggle-theme');
+
     fireEvent.click(toggleButton);
 
     fireEvent.click(toggleButton);
