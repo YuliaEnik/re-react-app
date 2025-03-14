@@ -5,7 +5,7 @@ import { store } from '~/Store/store';
 import { artworksApi } from '~/service/getApi';
 import styles from './style.module.scss';
 
-export interface IArtworkDetails {
+interface IArtworkDetails {
   artworkId: number;
   onClose: () => void;
 }

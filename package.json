@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "start": "next start",
     "lint": "next lint",
     "format:fix": "prettier --write .",
