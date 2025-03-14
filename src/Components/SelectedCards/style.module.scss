@@ -1,0 +1,76 @@
+.selected_content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.selected_title {
+  //width: 100%;
+  font-size: 1.2rem;
+}
+
+.img {
+  height: 2rem;
+  width: 3rem;
+}
+
+.modal_actions {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.selected_list {
+  height: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.selected_card {
+  width: 10rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem 0.2rem rgba(189, 187, 187, 0.5);
+  background-color: rgb(249, 249, 249, 0.7);
+  gap: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 0.7s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal_action_button {
+  padding: 10px 20px;
+  color: black;
+  border: none;
+  border-radius: 0.5rem;
+  border: solid 0.01rem grey;
+  cursor: pointer;
+}
+
+.modal_action_button:hover {
+  background-color: rgba(209, 207, 207, 0.9);
+}
