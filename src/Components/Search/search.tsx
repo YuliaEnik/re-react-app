@@ -16,7 +16,7 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
     props.onSubmit(input);
   };
   return (
-    <div className={styles.search}>
+    <section className={styles.search}>
       <form
         className={styles.search_form}
         data-testid="search-form"
@@ -31,7 +31,7 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
           onChange={(e) => setInput(e.target.value)}
         />
       </form>
-    </div>
+    </section>
   );
 };
 

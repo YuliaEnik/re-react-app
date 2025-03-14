@@ -1,22 +1,21 @@
-.selected_overlay {
-  width: 100%;
-  padding: 0.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  font-size: 0.6rem;
-}
-
 .selected_content {
   display: flex;
-  max-width: 100%;
+  width: 100%;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
+}
+.control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 .selected_title {
+  //width: 100%;
   font-size: 1.2rem;
 }
 
@@ -36,11 +35,12 @@
   max-width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
 }
 
 .selected_card {
-  width: 15rem;
+  width: 10rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.5rem 0.2rem rgba(189, 187, 187, 0.5);

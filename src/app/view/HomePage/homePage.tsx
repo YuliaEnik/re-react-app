@@ -67,8 +67,19 @@ export default function HomePage({
 
   return (
     <section className={styles.home_page} data-testid="home-page">
-     <Search onSubmit={handleSearchSubmit} initialQuery={query} /> 
-      <div className={styles.cards_list_page} data-testid="cards-list-page">
+      <div className={styles.control}>
+      <Search onSubmit={handleSearchSubmit} initialQuery={query} /> 
+      {artList && artList.pagination && (
+          <Pagination
+            page={page}
+            totalPages={artList.pagination.total_pages}
+            onPageChange={handlePageChange}
+            data-testid="pagination"
+          />
+        )}
+        
+      </div>
+      <section className={styles.cards_list_page} data-testid="cards-list-page">
         <ul className={styles.cards_list}>
           {artList && artList.data && (
             <>
@@ -83,22 +94,16 @@ export default function HomePage({
             </>
           )}
         </ul>
-        {artList && artList.pagination && (
-          <Pagination
-            page={page}
-            totalPages={artList.pagination.total_pages}
-            onPageChange={handlePageChange}
-            data-testid="pagination"
-          />
-        )}
-      </div>
-      <div className={styles.modal_wrapper} data-testid="artwork-modal">
+      </section>
+      <section className={styles.modal_wrapper} data-testid="artwork-modal">
       {artworkId && (
           <ArtworkDetails artworkId={artworkId}
             onClose={handleCloseModal}/>
           )}
-      </div>
+      </section>
+      <section className={styles.selected_overlay} data-testid="selected-cards">
       <SelectedCards data-testid="selected-cards"/> 
+      </section>
     </section>
   );
 }
