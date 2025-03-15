@@ -1,0 +1,29 @@
+.cards-page {
+  height: 100%;
+  width: 100%;
+  padding: 2rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+.cards-wrapper {
+  padding: 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+@media (min-width: 1280px) {
+  .cards-wrapper{
+  width: 80rem;
+  padding: 0;
+  }
+}
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}

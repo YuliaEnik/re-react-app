@@ -1,0 +1,22 @@
+.search_button {
+  height: 2rem;
+  width: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: rgb(195 197 209);
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5), 5px 5px 15px 0px rgba(0, 0, 0, 0.1),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgb(62, 69, 118);
+  transition: all 0.8s ease;
+  &:hover {
+    background-color: rgb(195 197 209 / 50%);
+  }
+}
