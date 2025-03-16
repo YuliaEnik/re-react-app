@@ -1,41 +1,55 @@
 import React, { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Button } from '../Button/button';
 import { schema } from '../../Validation/validationSchema';
-import { addCard } from '../../Store/slice';
+import { addCard } from '../../Store/sliceForm';
+import { RootState } from '../../Store/store';
 import * as yup from 'yup';
 import './style.scss';
+import { convertFileToBase64 } from '../../service/converFile';
 
 export function FormUnControl() {
   const [savedMessage, setSavedMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [filteredCountries, setFilteredCountries] = useState<string[]>([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const countries = useSelector((state: RootState) => state.countries.list);
 
   const nameRef = useRef<HTMLInputElement>(null);
   const ageRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
-  const countryRef = useRef<HTMLSelectElement>(null);
+  const countryRef = useRef<HTMLInputElement>(null);
   const genderRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const agreeRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
+  const handleCountryInputChange = () => {
+    const value = countryRef.current?.value || '';
+    if (value) {
+      const filtered = countries.filter((country) =>
+        country.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredCountries(filtered);
+    } else {
+      setFilteredCountries([]);
+    }
+  };
+  const handleCountrySelect = (country: string) => {
+    if (countryRef.current) {
+      countryRef.current.value = country;
+    }
+    setFilteredCountries([]);
   };
 
-  const convertFileToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (error) => reject(error);
-    });
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -89,14 +103,12 @@ export function FormUnControl() {
   return (
     <form className="form-wrapper" onSubmit={handleSubmit}>
       <div className="input-wrapper">
-        <label htmlFor="name" className="form-line">
+        <label className="form-line">
           Name:
           <input
-            id="name"
             type="text"
             placeholder="Enter your name..."
             className="input"
-            autoComplete="off"
             ref={nameRef}
           />
         </label>
@@ -104,10 +116,9 @@ export function FormUnControl() {
       </div>
 
       <div className="input-wrapper">
-        <label htmlFor="age" className="form-line">
+        <label className="form-line">
           Age:
           <input
-            id="age"
             type="number"
             className="input"
             placeholder="Enter your age..."
@@ -118,14 +129,12 @@ export function FormUnControl() {
       </div>
 
       <div className="input-wrapper">
-        <label htmlFor="email" className="form-line">
+        <label className="form-line">
           Email:
           <input
-            id="email"
             type="email"
             placeholder="Enter your email..."
             className="input"
-            autoComplete="off"
             ref={emailRef}
           />
         </label>
@@ -133,15 +142,29 @@ export function FormUnControl() {
       </div>
 
       <div className="input-wrapper">
-        <label htmlFor="country" className="form-line">
+        <label className="form-line">
           Country:
-          <select id="country" className="input" ref={countryRef}>
-            <option value=""> </option>
-            <option value="Belarus"> Belarus </option>
-            <option value="USA"> USA </option>
-            <option value="Poland"> Poland </option>
-            <option value="Germany"> Germany </option>
-          </select>
+          <input
+            type="text"
+            placeholder="Enter your country..."
+            className="input"
+            ref={countryRef}
+            onChange={handleCountryInputChange}
+            autoComplete="off"
+          />
+          {filteredCountries.length > 0 && (
+            <ul className="autocomplete-list">
+              {filteredCountries.map((country, index) => (
+                <li
+                  key={index}
+                  onClick={() => handleCountrySelect(country)}
+                  className="autocomplete-item"
+                >
+                  {country}
+                </li>
+              ))}
+            </ul>
+          )}
         </label>
         {errors.country && <p className="error">{errors.country}</p>}
       </div>
@@ -171,7 +194,7 @@ export function FormUnControl() {
       </div>
 
       <div className="input-wrapper">
-        <label htmlFor="file" className="form-line">
+        <label className="form-line">
           Choose image:
           <input
             id="file"
@@ -184,18 +207,17 @@ export function FormUnControl() {
       </div>
 
       <div className="input-wrapper">
-        <label htmlFor="agree" className="form-line">
+        <label className="form-line">
           I agree:
-          <input id="agree" type="checkbox" ref={agreeRef} />
+          <input type="checkbox" ref={agreeRef} />
         </label>
         {errors.agree && <p className="error">{errors.agree}</p>}
       </div>
 
       <div className="input-wrapper_password">
-        <label htmlFor="password" className="form-line">
+        <label className="form-line">
           Password:
           <input
-            id="password"
             className="input"
             type={showPassword ? 'text' : 'password'}
             placeholder="Enter your password..."
@@ -213,10 +235,9 @@ export function FormUnControl() {
       </div>
 
       <div className="input-wrapper_password">
-        <label htmlFor="confirmPassword" className="form-line">
+        <label className="form-line">
           Confirm Password:
           <input
-            id="confirmPassword"
             className="input"
             type={showPassword ? 'text' : 'password'}
             placeholder="Confirm your password..."
@@ -235,7 +256,7 @@ export function FormUnControl() {
         )}
       </div>
       <Button type="submit">Submit</Button>
-      {savedMessage && <p className="form-message">{savedMessage}</p>}
+      {savedMessage ? <p className="form-message">{savedMessage}</p> : <br />}
     </form>
   );
 }

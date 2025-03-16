@@ -42,3 +42,13 @@ export interface IDataForm {
   confirmPassword: string;
   file: FileList;
 }
+export interface IDataFormWithoutFile {
+  name: string;
+  age: number;
+  email: string;
+  country: string;
+  gender: string;
+  agree: boolean;
+  password: string;
+  confirmPassword: string;
+}

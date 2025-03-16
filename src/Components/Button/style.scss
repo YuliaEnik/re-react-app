@@ -1,4 +1,4 @@
-.search_button {
+.button_submit {
   height: 2rem;
   width: 8rem;
   display: flex;
@@ -18,5 +18,10 @@
   transition: all 0.8s ease;
   &:hover {
     background-color: rgb(195 197 209 / 50%);
+  }
+  &:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
   }
 }
