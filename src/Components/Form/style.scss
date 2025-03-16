@@ -27,6 +27,34 @@
   width: 100%;
   text-align: end;
   height: 4rem;
+   &_password {
+    position: relative;
+    width: 100%;
+    text-align: end;
+    height: 4rem;
+    /* display: flex;
+    align-items: center; */
+    .input {
+      padding-right: 40px;
+    }
+    .password-toggle {
+      position: absolute;
+      right: 10px;
+      top: 20%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      color: #666;
+        &:hover {
+          color: #000;
+        }
+     }
+  }
 }
 
 .input {

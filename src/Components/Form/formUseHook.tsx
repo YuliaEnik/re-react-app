@@ -1,34 +1,55 @@
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { IData, IDataForm } from './types';
 import { Button } from '../Button/button';
-import './style.scss';
 import { useDispatch } from 'react-redux';
 import { addCard } from '../../Store/slice';
 import { useNavigate } from 'react-router-dom';
+import { schema } from '../../Validation/validationSchema';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import './style.scss';
 
-export function Form() {
+export function FormUseHook() {
   const [savedMessage, setSavedMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
-  } = useForm<IDataForm>({ mode: 'onSubmit', reValidateMode: 'onSubmit' });
+    formState: { errors, isValid },
+  } = useForm<IDataForm>({ mode: 'onChange', resolver: yupResolver(schema) });
 
-  const onSubmit: SubmitHandler<IDataForm> = (data) => {
+  const convertFileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const onSubmit: SubmitHandler<IDataForm> = async (data) => {
+    const fileBase64 = await convertFileToBase64(data.file[0]);
+
     const cardData: IData = {
       ...data,
-      file: URL.createObjectURL(data.file[0]),
-      agree: 'agree',
+      file: fileBase64,
+      agree: data.agree,
     };
+
     setSavedMessage('Information has been saved');
     setTimeout(() => {
       setSavedMessage('');
     }, 2000);
+
     dispatch(addCard(cardData));
     reset();
     setTimeout(() => {
@@ -40,16 +61,15 @@ export function Form() {
     <>
       <form className="form-wrapper" onSubmit={handleSubmit(onSubmit)}>
         <div className="input-wrapper">
-          <label className="form-line">
+          <label htmlFor="name" className="form-line">
             Name:
             <input
-              type="input"
+              id="name"
+              type="text"
               placeholder="Enter your name..."
               className="input"
               autoComplete="off"
-              {...register('name', {
-                required: 'The name should contain 1 or more letters',
-              })}
+              {...register('name')}
             />
           </label>
           {errors.name ? (
@@ -169,39 +189,55 @@ export function Form() {
             <br />
           )}
         </div>
-        <div className="input-wrapper">
+        <div className="input-wrapper_password">
           <label className="form-line">
             Password:
             <input
               className="input"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               placeholder="Enter your password..."
               {...register('password', {
                 required: 'Password is required',
               })}
             />
+            <button
+              type="button"
+              className="password-toggle"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
           </label>
           {errors.password && (
             <p className="error">{errors.password.message}</p>
           )}
         </div>
-        <div className="input-wrapper">
+        <div className="input-wrapper_password">
           <label className="form-line">
             Confirm Password:
             <input
               className="input"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               placeholder="Confirm your password..."
               {...register('confirmPassword', {
                 required: 'confirmPassword is required',
               })}
             />
+            <button
+              type="button"
+              className="password-toggle"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
           </label>
           {errors.confirmPassword && (
             <p className="error">{errors.confirmPassword.message}</p>
           )}
         </div>
-        <Button>Submit</Button>
+        <Button type="submit" disabled={!isValid}>
+          Submit
+        </Button>
         {savedMessage ? <p className="form-message">{savedMessage}</p> : <br />}
       </form>
       <div></div>

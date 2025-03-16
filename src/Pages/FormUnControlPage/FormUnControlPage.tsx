@@ -1,13 +1,12 @@
-import './style.scss';
-import { FormUseHook } from '../../Components/Form/formUseHook';
+import { FormUnControl } from '../../Components/Form/formUnControl';
 
-export function FormUseHookPage() {
+export function FormUnControlPage() {
   return (
     <div className="logIn-wrapper">
       <h3 className="title">
         <i>Welcome. Please make the form.</i>
       </h3>
-      <FormUseHook />
+      <FormUnControl />
     </div>
   );
 }

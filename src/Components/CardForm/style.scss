@@ -21,6 +21,11 @@
   &:hover {
     transform: scale(1.05);
   }
+}
+
+
+.last-card {
+  box-shadow: 0 0 10px 5px rgb(189, 241, 151);
   opacity: 0;
   animation: fadeIn 0.7s ease-in-out forwards;
 }
@@ -32,9 +37,4 @@
   to {
     opacity: 1;
   }
-}
-
-
-.last-card {
-  box-shadow: 0 0 10px 5px rgb(189, 241, 151);
 }

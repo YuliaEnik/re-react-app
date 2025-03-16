@@ -23,7 +23,7 @@ export interface IData {
   email: string;
   country: string;
   gender: string;
-  agree: string;
+  agree: boolean;
   password: string;
   confirmPassword: string;
   file: string;
@@ -31,17 +31,13 @@ export interface IData {
 
 export type FormData = IData[];
 
-export type FormProps = {
-  createCardList: (card: IData) => void;
-};
-
 export interface IDataForm {
   name: string;
   age: number;
   email: string;
   country: string;
   gender: string;
-  agree: string;
+  agree: boolean;
   password: string;
   confirmPassword: string;
   file: FileList;

@@ -1,14 +1,20 @@
-import React from 'react';
 import './style.scss';
+import { IButton } from './types';
 
-interface IButton {
-  children?: React.ReactNode;
-}
-
-export const Button: React.FC<IButton> = ({ children }) => {
+export function Button({
+  children,
+  type = 'button',
+  disabled,
+  onClick,
+}: IButton) {
   return (
-    <button type="submit" className="search_button">
+    <button
+      className="search_button"
+      type={type}
+      disabled={disabled}
+      onClick={onClick}
+    >
       {children}
     </button>
   );
-};
+}
