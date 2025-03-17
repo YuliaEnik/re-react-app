@@ -1,0 +1,41 @@
+.nav {
+  width: 80rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.nav-list {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 0.5rem;
+  &_item {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 100%;
+    font-size: 1.2rem;
+    font-weight: 600;
+    &:hover {
+      cursor: pointer;
+      opacity: 0.5;
+    }
+  }
+}
+
+.link {
+  text-decoration: none;
+  list-style: none;
+  color: rgb(14, 110, 129);
+  font-size: 1.5rem;
+}
+
+.active {
+  color: rgb(25, 98, 109);
+  font-style: italic;
+  text-decoration: underline;
+}
