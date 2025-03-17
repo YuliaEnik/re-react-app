@@ -10,7 +10,6 @@ import { schema } from '../../Validation/validationSchema';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { RootState } from '../../Store/store';
 import './style.scss';
-import { convertFileToBase64 } from '../../service/converFile';
 
 export function FormUseHook() {
   const [savedMessage, setSavedMessage] = useState('');
@@ -32,6 +31,15 @@ export function FormUseHook() {
     formState: { errors, isValid },
     setValue,
   } = useForm<IDataForm>({ mode: 'onChange', resolver: yupResolver(schema) });
+
+  const convertFileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+  };
 
   const onSubmit: SubmitHandler<IDataForm> = async (data) => {
     const fileBase64 = await convertFileToBase64(data.file[0]);
