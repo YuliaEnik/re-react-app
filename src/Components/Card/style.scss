@@ -1,0 +1,22 @@
+.cards-list_row {
+  width: 100%;
+  padding: .3rem 1rem .3rem 1rem;
+  display: grid;
+  grid-template-columns: 7% 15% 33% 15% 15%;
+  text-align: left;
+  align-items: center;
+  box-shadow: 0 0 10px 5px rgb(221, 221, 221);
+  transition: all .8s;
+  gap: .5rem;
+  &:hover {
+    transform: scale(1.01);
+    background-color: #e8e8e8;
+  }
+  &_img {
+    height: 2rem;
+    width: 3rem;
+  }
+}
+.cards-list_row > h3 {
+  padding-left: 1rem;
+}
