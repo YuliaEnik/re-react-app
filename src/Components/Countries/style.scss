@@ -1,6 +1,43 @@
 .countries-container {
+  width: 90%;
+  margin: 0 auto;
   display: grid;
-  gap: 20px;
+  justify-self: center;
+  gap: 1rem;
   padding: 20px;
   list-style: none;
+}
+
+.title {
+  width: 100%;
+  padding: .5rem;
+  display: grid;
+  grid-template-columns: 7% 15% 33% 15% 15%;
+  text-align: left;
+  align-items: center;
+  box-shadow: 0 0 10px 5px rgb(221, 221, 221);
+  gap: 1rem;
+  background-color: #acacac;
+  font-size: .7rem;
+}
+
+.sort-buttons {
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sort-buttons:hover {
+  color: #c4e76b;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .2rem;
 }

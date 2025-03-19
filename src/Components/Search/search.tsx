@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import './style.scss';
 
 export interface SearchProps {
@@ -8,25 +8,20 @@ export interface SearchProps {
 }
 
 const Search: React.FC<SearchProps> = ({ search, onChange, onSubmit }) => {
-  const inputref = createRef<HTMLInputElement>();
 
   return (
-    <div className="header">
-      <div className="search">
-        <form className="search" onSubmit={onSubmit} data-testid="search-form">
+      <div className="search-wrap">
+        <form className="search" onSubmit={onSubmit}>
           <input
             type="text"
             name="text"
             className="search-form_input"
-            placeholder="Search..."
+            placeholder="Search by name..."
             onChange={onChange}
-            ref={inputref}
-            defaultValue={search}
+            value={search}
           />
-          <button type="submit" className="search-button"></button>
         </form>
       </div>
-    </div>
   );
 };
 

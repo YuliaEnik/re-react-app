@@ -4,8 +4,13 @@ import Countries from './Components/Countries/countries';
 function App() {
   return (
     <>
-      <Countries />
-    </>
+      <header> 
+        <h1>Countries App</h1>
+      </header>
+      <main>
+        <Countries />
+      </main>
+      </>
   );
 }
 

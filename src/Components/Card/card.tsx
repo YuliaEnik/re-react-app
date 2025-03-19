@@ -1,23 +1,5 @@
 import './style.scss';
-
-interface IData {
-  flags: {
-    png: string;
-    alt: string;
-  };
-  name: {
-    common: string;
-    official: string;
-    nativeName?: {
-      [key: string]: {
-        official: string;
-        common: string;
-      };
-    };
-  };
-  region: string;
-  population: number;
-}
+import { IData } from './types';
 
 interface CardProps {
   data: IData;
@@ -42,7 +24,7 @@ export const Card: React.FC<CardProps> = ({ data }) => {
         <i>{data.region}</i>
       </h3>
       <h3>
-        <i>{data.population}</i>
+        <i>{data.population.toLocaleString()}</i>
       </h3>
     </li>
   );

@@ -6,10 +6,12 @@ import { Card } from '../Card/card.tsx';
 import { IData } from '../Card/types.ts';
 
 export const Countries = () => {
-  const [countries, setCountries] = useState<IData[]>([]); // Типизируем состояние
+  const [countries, setCountries] = useState<IData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  //const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState<'population' | 'name'>('population');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
   useEffect(() => {
     const getCountries = async () => {
@@ -36,20 +38,70 @@ export const Countries = () => {
     return <div>{error}</div>;
   }
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSort = (type: 'population' | 'name') => {
+    if (type === sortBy) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortBy(type);
+      setSortOrder('asc');
+    }
+  };
+
+  const filteredCountries = countries.filter((country) =>
+    country.name.common.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    country.name.official.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const sortedCountries = [...filteredCountries].sort((a, b) => {
+    if (sortBy === 'population') {
+      return sortOrder === 'asc' ? a.population - b.population : b.population - a.population;
+    } else {
+      return sortOrder === 'asc'
+        ? a.name.common.localeCompare(b.name.common)
+        : b.name.common.localeCompare(a.name.common);
+    }
+  });
+
   return (
-    <div>
+    <>
       <Search
-        onSubmit={function (): void {
-          throw new Error('Function not implemented.');
+        search={searchTerm}
+        onChange={handleSearchChange}
+        onSubmit={(e) => {
+          e.preventDefault();
         }}
       ></Search>
       <ul className="countries-container">
-      {countries.map((country) => (
+      <li className="title">
+      <h3>
+        <i>Flag</i>
+      </h3>
+      <h3>
+        <i>Name common</i>
+      </h3>
+      <h3>
+        <i>Name official</i>
+      </h3>
+      <h3 className='nav'>
+        <i>Region</i>
+      </h3>
+      <h3 className='nav'>
+        <i>Population</i>
+        <button className='sort-buttons' onClick={() => handleSort('population')}>
+          {sortBy === 'population' && (sortOrder === 'asc' ? '▲' : '▼')}
+        </button>
+      </h3>
+    </li>
+      {sortedCountries.map((country) => (
           <Card key={country.name.common} data={country} />
         ))}
 
       </ul>
-    </div>
+    </>
   );
 };
 
