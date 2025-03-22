@@ -1,6 +1,7 @@
 export interface IData {
   flags: {
     png: string;
+    svg: string;
     alt: string;
   };
   name: {

@@ -1,0 +1,28 @@
+.checkbox input {
+  display: none;
+}
+
+.checkbox label {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  border: solid 0.08rem black;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.7rem;
+  height: 0.7rem;
+  background-color: rgb(152, 233, 139);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.2s ease;
+}
+
+.checkbox input:checked + label::after {
+  transform: translate(-50%, -50%) scale(1);
+}
