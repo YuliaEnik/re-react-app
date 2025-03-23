@@ -1,7 +1,7 @@
 import { useEffect, useState, memo, useCallback } from 'react';
 import { Checkbox } from '../Checkbox/checkbox';
-import './style.scss';
 import { IData } from './types';
+import './style.scss';
 
 interface CardProps {
   data: IData;
@@ -42,8 +42,8 @@ export const Card: React.FC<CardProps> = memo( ({ data }) => {
     right: 0,
     bottom: 0,
     left: 0,
-    backgroundImage:`linear-gradient(to right, rgba(255, 255, 255, 1) 7%, rgba(255, 255, 255, 0.4)), url(${data.flags.svg})`,
-    backgroundSize: '25% auto',
+    backgroundImage:`linear-gradient(to right, rgba(255, 255, 255, 1) 9%, rgba(255, 255, 255, 0.4)), url(${data.flags.svg})`,
+    backgroundSize: '30% auto',
     backgroundPosition: 'right',
     backgroundRepeat: 'no-repeat',
     filter: isVisited ? 'none' : 'grayscale(100%)',
