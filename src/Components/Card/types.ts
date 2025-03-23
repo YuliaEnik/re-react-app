@@ -16,4 +16,5 @@ export interface IData {
   };
   region: string;
   population: number;
+  cca3: string;
 }

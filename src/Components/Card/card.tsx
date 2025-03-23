@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo, useCallback } from 'react';
 import { Checkbox } from '../Checkbox/checkbox';
 import './style.scss';
 import { IData } from './types';
@@ -7,7 +7,7 @@ interface CardProps {
   data: IData;
 }
 
-export const Card: React.FC<CardProps> = ({ data }) => {
+export const Card: React.FC<CardProps> = memo( ({ data }) => {
   const [isVisited, setIsVisited] = useState(false);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export const Card: React.FC<CardProps> = ({ data }) => {
     setIsVisited(!!visitedCountries[data.name.common]);
   }, [data.name.common]);
 
-  const handleCheckboxChange = () => {
+  const handleCheckboxChange = useCallback(() => {
     const visitedCountries: Record<string, boolean> = JSON.parse(localStorage.getItem('visitedCountries') ?? "{}");
     const newVisited = !isVisited;
 
@@ -27,7 +27,7 @@ export const Card: React.FC<CardProps> = ({ data }) => {
 
     localStorage.setItem('visitedCountries', JSON.stringify(visitedCountries));
     setIsVisited(newVisited);
-  };
+  }, []);
 
 
   const flagStyle: React.CSSProperties = {
@@ -42,8 +42,8 @@ export const Card: React.FC<CardProps> = ({ data }) => {
     right: 0,
     bottom: 0,
     left: 0,
-    backgroundImage:`linear-gradient(to right, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, 0.4)), url(${data.flags.svg})`,
-    backgroundSize: '35% auto',
+    backgroundImage:`linear-gradient(to right, rgba(255, 255, 255, 1) 7%, rgba(255, 255, 255, 0.4)), url(${data.flags.svg})`,
+    backgroundSize: '25% auto',
     backgroundPosition: 'right',
     backgroundRepeat: 'no-repeat',
     filter: isVisited ? 'none' : 'grayscale(100%)',
@@ -77,4 +77,4 @@ export const Card: React.FC<CardProps> = ({ data }) => {
       </h3>
     </li>
   );
-}
+});
