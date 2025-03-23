@@ -13,6 +13,7 @@ export const Countries = () => {
   const [selectedRegion, setSelectedRegion] = useState<string>('');
   const [sortBy, setSortBy] = useState<'population' | 'name'>('population');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [isSorted, setIsSorted] = useState(false);
 
   useEffect(() => {
     const getCountries = async () => {
@@ -46,6 +47,7 @@ export const Countries = () => {
   };
 
   const handleSort = (type: 'population' | 'name') => {
+    setIsSorted(true);
     if (type === sortBy) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
     } else {
@@ -61,7 +63,8 @@ export const Countries = () => {
     return matchesSearch && matchesRegion;
   });
 
-  const sortedCountries = [...filteredCountries].sort((a, b) => {
+  const sortedCountries = isSorted 
+  ? [...filteredCountries].sort((a, b) => {
     if (sortBy === 'population') {
       return sortOrder === 'asc' ? a.population - b.population : b.population - a.population;
     } else {
@@ -69,7 +72,8 @@ export const Countries = () => {
         ? a.name.common.localeCompare(b.name.common)
         : b.name.common.localeCompare(a.name.common);
     }
-  });
+  })
+  : filteredCountries;
 
   const regions = Array.from(new Set(countries.map((country) => country.region)));
 
@@ -90,8 +94,11 @@ export const Countries = () => {
           <h3>
             <i>Flag</i>
           </h3>
-          <h3>
+          <h3 className="nav">
             <i>Name common</i>
+            <button className="sort-buttons" onClick={() => handleSort('name')}>
+            ⇅
+            </button>
           </h3>
           <h3>
             <i>Name official</i>
@@ -99,7 +106,7 @@ export const Countries = () => {
           <h3 className="nav">
             <i>Population</i>
             <button className="sort-buttons" onClick={() => handleSort('population')}>
-              {sortBy === 'population' && (sortOrder === 'asc' ? '▲' : '▼')}
+            ⇅
             </button>
           </h3>
           <h3 className="nav">
