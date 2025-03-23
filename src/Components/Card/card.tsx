@@ -1,33 +1,21 @@
-import { useEffect, useState, memo, useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { Checkbox } from '../Checkbox/checkbox';
 import { IData } from './types';
+import { useVisitedCountries } from '../../services/locStorHook';
 import './style.scss';
+
 
 interface CardProps {
   data: IData;
 }
 
 export const Card: React.FC<CardProps> = memo( ({ data }) => {
-  const [isVisited, setIsVisited] = useState(false);
-
-  useEffect(() => {
-    const visitedCountries: Record<string, boolean> = JSON.parse(localStorage.getItem('visitedCountries') ?? "{}");
-    setIsVisited(!!visitedCountries[data.name.common]);
-  }, [data.name.common]);
+  const { visitedCountries, toggleVisited } = useVisitedCountries();
+  const isVisited = visitedCountries[data.name.common];
 
   const handleCheckboxChange = useCallback(() => {
-    const visitedCountries: Record<string, boolean> = JSON.parse(localStorage.getItem('visitedCountries') ?? "{}");
-    const newVisited = !isVisited;
-
-    if (newVisited) {
-      visitedCountries[data.name.common] = true; 
-    } else {
-      delete visitedCountries[data.name.common];
-    }
-
-    localStorage.setItem('visitedCountries', JSON.stringify(visitedCountries));
-    setIsVisited(newVisited);
-  }, []);
+    toggleVisited(data.name.common);
+  }, [toggleVisited, data.name.common]);
 
 
   const flagStyle: React.CSSProperties = {
