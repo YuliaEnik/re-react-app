@@ -1,0 +1,31 @@
+.search-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.search {
+  height: 2.5rem;
+  width: 70%;
+  box-shadow: 0 0 10px 5px rgb(221, 221, 221);
+  padding: .5rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-form_input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    transition: all 0.8s ease;
+    &:focus {
+      transform: scale(1.02);
+    }
+    &:active,
+    :hover,
+    :focus {
+      outline: none;
+      outline-offset: none;
+    }
+  }
+}
