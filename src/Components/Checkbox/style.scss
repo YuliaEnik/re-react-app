@@ -6,7 +6,7 @@
   display: inline-block;
   width: 0.8rem;
   height: 0.8rem;
-  border: solid 0.08rem black;
+  border: solid 0.05rem black;
   cursor: pointer;
   position: relative;
 }
@@ -16,8 +16,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 0.7rem;
-  height: 0.7rem;
+  width: 0.9rem;
+  height: 0.9rem;
   background-color: rgb(152, 233, 139);
   transform: translate(-50%, -50%) scale(0);
   transition: transform 0.2s ease;

@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import fetchCountries from '../../api/api.tsx';
-import './style.scss';
 import { Search } from '../Search/search.tsx';
 import { Card } from '../Card/card.tsx';
 import { IData } from '../Card/types.ts';
+import './style.scss';
 
 export const Countries = () => {
   const [countries, setCountries] = useState<IData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedRegion, setSelectedRegion] = useState<string>(''); // Состояние для региона
+  const [selectedRegion, setSelectedRegion] = useState<string>('');
   const [sortBy, setSortBy] = useState<'population' | 'name'>('population');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
@@ -20,14 +20,12 @@ export const Countries = () => {
         const data = await fetchCountries();
         setCountries(data);
         setLoading(false);
-        console.log(data);
       } catch (error) {
         console.error('Error:', error);
         setError('Failed to fetch countries');
         setLoading(false);
       }
     };
-
     getCountries();
   }, []);
 
