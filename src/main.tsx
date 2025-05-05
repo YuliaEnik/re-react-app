@@ -8,24 +8,28 @@ import { Provider } from 'react-redux';
 import { NotFound } from './view/NotFound/index.tsx';
 import { store } from './Store/store.tsx';
 
-//const isProduction = process.env.NODE_ENV === 'production';
-//const basename = isProduction ? '/re-react-app' : '/';
+const appBase = process.env.VITE_APP_BASE || '/re-react-app/';
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <Navigate to={appBase} />,
+    },
+    {
+      path: appBase,
+      element: <App />,
+      errorElement: <NotFound />,
+    },
+    {
+      path: '*',
+      element: <NotFound />,
+    },
+  ],
   {
-    path: '/',
-    element: <Navigate to={`/re-react-app`} />,
-  },
-  {
-    path: '/re-react-app',
-    element: <App />,
-    errorElement: <NotFound />,
-  },
-  {
-    path: '*',
-    element: <NotFound />,
-  },
-]);
+    basename: appBase,
+  }
+);
 
 createRoot(document.getElementById('root') as Element).render(
   <StrictMode>

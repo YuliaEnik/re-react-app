@@ -13,11 +13,11 @@
     "prepare": "husky",
     "test": "vitest",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "gh-pages -d dist -b gh-pages",
     "coverage": "vitest run --coverage",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,css,scss,json}\"",
     "preinstall": "npx npm-force-resolutions",
-    "deploy:app-state-management": "gh-pages -d dist -b app-state-management"
+    "deploy:state": "VITE_APP_BASE=/app-state-management/ vite build && gh-pages -d dist -o gh-pages --add --dest=app-state-management"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
