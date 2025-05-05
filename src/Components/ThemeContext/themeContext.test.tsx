@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom/vitest';
 import { describe, it, expect } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { ThemeProvider, ThemeContext } from './themeContext';
 import { useContext } from 'react';
+import { ThemeContext, ThemeProvider } from './themeContext';
 
 describe('ThemeProvider Component', () => {
   it('provides the initial theme as "light"', () => {
