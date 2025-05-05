@@ -1,0 +1,76 @@
+$light-background: #f9f9f9;
+$light-text: #000000;
+
+$dark-background: #11111e;
+$dark-text: #4a4848;
+
+$art-background: #f9f9f9;
+$art-text: #000000;
+
+$box-shadow: 0 0 0.5rem 0.2rem rgba(189, 187, 187, 0.5);
+$opacityBG: 0.6;
+
+@mixin theme-colors($background, $text) {
+  background-color: $background;
+  color: $text;
+}
+
+@mixin background-image($image) {
+  background-image: url($image);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.light {
+  min-height: 100vh;
+  @include theme-colors($light-background, $light-text);
+  .header {
+    @include theme-colors($light-background, $light-text);
+  }
+}
+
+.dark {
+  min-height: 100vh;
+  @include theme-colors($dark-background, $dark-text);
+  .header {
+    @include theme-colors($dark-background, $dark-text);
+  }
+}
+
+.art {
+  min-height: 100vh;
+  @include theme-colors($art-background, $art-text);
+
+  .header {
+    @include theme-colors($light-background, $light-text);
+  }
+
+  .main {
+    @include background-image('/mainartbg1.jpg');
+  }
+}
+
+.header {
+  width: 100%;
+  height: 6rem;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  box-shadow: $box-shadow;
+  z-index: 100;
+}
+
+.main {
+  min-height: 100vh;
+  padding-top: 3rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
+}
