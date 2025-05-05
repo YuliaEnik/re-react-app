@@ -1,6 +1,7 @@
 import { configDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
+  base: '/re-react-app/',
   test: {
     exclude: [...configDefaults.exclude, 'packages/template/*'],
     environment: 'jsdom',
