@@ -8,8 +8,8 @@ import { Provider } from 'react-redux';
 import { NotFound } from './view/NotFound/index.tsx';
 import { store } from './Store/store.tsx';
 
-const isProduction = process.env.NODE_ENV === 'production';
-const basename = isProduction ? '/re-react-app' : '/';
+//const isProduction = process.env.NODE_ENV === 'production';
+//const basename = isProduction ? '/re-react-app' : '/';
 
 const router = createBrowserRouter(
   [
@@ -24,7 +24,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: basename,
+    basename: '/re-react-app',
   }
 );
 
