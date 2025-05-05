@@ -1,5 +1,5 @@
 import './style.scss';
-import { ThemeContext } from '../ThemeContext/themeContext';
+import { ThemeContext } from '../ThemeContext/Theme-Context';
 
 import { useContext } from 'react';
 
