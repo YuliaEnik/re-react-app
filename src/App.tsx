@@ -4,7 +4,7 @@ import { ThemeButton } from './Components/ButtonTheme/buttonTheme';
 import {
   ThemeContext,
   ThemeProvider,
-} from './Components/ThemeContext/Theme-Context';
+} from './Components/ThemeContext/themeContext';
 import { HomePage } from './view/HomePage/homePage';
 
 export function App(): JSX.Element {
