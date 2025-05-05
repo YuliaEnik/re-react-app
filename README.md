@@ -4,4 +4,6 @@
 
 ### This is a tutorial project to learn about react
 
-## Result of my work  [Art App](https://YuliaEnik.github.io/re-react-app)
+## Result of my work  [Countries App](https://YuliaEnik.github.io/re-react-app)
+
+## Result of my work  [Art App](https://YuliaEnik.github.io/re-react-app/app-state-management)
