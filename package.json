@@ -16,7 +16,8 @@
     "deploy": "gh-pages -d dist",
     "coverage": "vitest run --coverage",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,css,scss,json}\"",
-    "preinstall": "npx npm-force-resolutions"
+    "preinstall": "npx npm-force-resolutions",
+    "deploy:app-state-management": "gh-pages -d dist -b app-state-management"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
