@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: process.env.VITE_APP_BASE || '/re-react-app/',
+  base: '/re-react-app/app-state-management/',
   plugins: [react()],
   build: {
     outDir: 'dist',

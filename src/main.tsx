@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { NotFound } from './view/NotFound/index.tsx';
 import { store } from './Store/store.tsx';
 
-const appBase = process.env.VITE_APP_BASE || '/re-react-app/';
+const appBase = '/re-react-app/app-state-management';
 
 const router = createBrowserRouter(
   [
