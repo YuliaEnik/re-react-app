@@ -2,27 +2,38 @@ import React from 'react';
 import { IData } from '../../Data/data';
 import './card.scss';
 
-class Card extends React.Component<IData> {
+interface CardState {
+  imgError: boolean;
+}
+class Card extends React.Component<IData, CardState> {
   constructor(props: IData) {
     super(props);
-    this.state = {};
+    this.state = {
+      imgError: false,
+    };
   }
 
   render() {
     return (
       <li className="card-wrapper" data-testid="card">
-        <img
-          src={`https://www.artic.edu/iiif/2/${this.props.image_id}/full/843,/0/default.jpg`}
-          alt={this.props.title}
-        />
+        {this.props.primaryImageSmall && !this.state.imgError ? (
+          <img
+            src={this.props.primaryImageSmall}
+            alt={this.props.title || 'Artwork'}
+            onError={() => this.setState({ imgError: true })}
+            style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+          />
+        ) : (
+          <div className="image-placeholder">🖼️ Image not available</div>
+        )}
         <h3>
-          Author: <i>{this.props.artist_title}</i>
+          Author: <i>{this.props.artistDisplayName || 'Unknown'}</i>
         </h3>
         <h3>
-          Name: <i>{this.props.title}</i>
+          Name: <i>{this.props.title || 'Untitled'}</i>
         </h3>
         <h3>
-          Year: <i>{this.props.date_display}</i>
+          Year: <i>{this.props.objectDate || 'Unknown'}</i>
         </h3>
       </li>
     );

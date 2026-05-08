@@ -1,9 +1,9 @@
 export interface IData {
-  id?: number;
-  title?: string;
-  artist_title?: string;
-  date_display?: string;
-  image_id?: string;
+  objectID: number;
+  title: string;
+  artistDisplayName: string;
+  objectDate: string;
+  primaryImageSmall: string;
 }
 
 export interface StateI {

@@ -50,7 +50,7 @@ class HomePage extends React.Component<unknown, IDataApi> {
               {this.state.isLoading && <p className="loading">Loading...</p>}
               {this.state.repos &&
                 this.state.repos.map((cardData: IData) => (
-                  <Card {...cardData} key={cardData.image_id} />
+                  <Card {...cardData} key={cardData.objectID} />
                 ))}
             </ul>
             <ErrorButton />

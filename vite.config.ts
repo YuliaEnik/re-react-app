@@ -7,5 +7,5 @@ export default defineConfig({
   server: {
     port: 4173,
   },
-  base: 're-react-app',
+  base: '/re-react-app/',
 });
